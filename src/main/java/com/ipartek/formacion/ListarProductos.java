@@ -65,7 +65,7 @@ public class ListarProductos {
 			System.out.println("Numero de registros insertados: "+affectedrows);
 			System.out.println("\n*****************************\n");
 			
-			
+			 
 			
 			//INSERTAR PRODUCTOS POR TECLADO
 			System.out.println("\tRealizando la siguiente query:\n 1- INSERT INTO producto (nombre, id_usuario) VALUES (?,nombre);\n");
