@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import com.ipartek.formacion.modelo.Producto;
+
 
 
 public class ListarProductos {
@@ -44,9 +46,14 @@ public class ListarProductos {
 			//LEER DATOS QUE DEVUELVE LA QUERY
 			System.out.println("\n\n\t Listado de productos\n");
 			while (rs.next()) {
-				int id= rs.getInt("id");
-				String nombre= rs.getString("nombre");
-				System.out.println("id= "+id +" nombre= "+nombre);
+				int id        = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				
+				Producto p = new Producto(nombre);
+				p.setId(id);
+				
+				
+				System.out.println(p);
 				
 			}
 			
