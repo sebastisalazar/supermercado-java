@@ -1,67 +1,70 @@
-package com.ipartek.formacion;
+package com.ipartek.formacion.ejercicios.bbdd;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 
+import com.ipartek.formacion.modelo.ConnectionManager;
+
 /**
  * 
- * @see http://www.chuidiang.org/java/mysql/EjemploJava.php
+ * 
+ * Usamos executeUpdate() siempre que usamos una SQL con (INSERT, DELETE o UPDATE ) y nos retorna "int" con numero de filas afectadas 
+ * 
+ * @see http://www.chuidiang.org/java/mysql/EjemploJava.php 
  * @author javaee
  *
  */
-public class InsertarProductos {
+public class InsertarProductosConDAO {
 
+	
+	
 	public static void main(String[] args) {
 
-		final String URL = "jdbc:mysql://localhost/supermercado";
-		final String USUARIO = "debian-sys-maint";
-		final String PASS = "o8lAkaNtX91xMUcV";
-		final String SQL = " INSERT INTO producto (nombre, id_usuario) VALUES ( ? , 1) ; ";
-		boolean continuar = true;
 
-		try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASS);
+		final String SQL = " INSERT INTO producto (nombre, id_usuario) VALUES ( ? , 1) ; ";
+		boolean continuar = true; 
+				
+
+		try(
+				Connection conexion = ConnectionManager.getConnection();	
 				PreparedStatement pst = conexion.prepareStatement(SQL);
 				Scanner sc = new Scanner(System.in);
-
-		) {
-
-			// comprobar que tengamos el .jar de MySQL
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Existe el .jar para mysql");
-
+				
+			){
+	
+		
+			
 			do {
-				System.out.print("Escribe el nombre del producto: ");
-
-				String nombre = sc.nextLine();
-
+				System.out.println("Dime el nombre del producto a guardar");
+				String nombre = sc.nextLine();	
 				// cambiamos el 1º ? de la SQL por la varaiabel nombre
 				// INSERT INTO producto (nombre, id_usuario) VALUES ( ? , 1) ;
 				pst.setString(1, nombre);
-
+	
 				try {
-
+					
 					int affectedRows = pst.executeUpdate();
 					// affedetedRows es el numero de registros insertados
 					if (affectedRows == 1) {
-						System.out.println("\nEl producto se ha guardado con exito");
+						System.out.println("El producto se ha guardado con exito");
 						continuar = false;
 					}
-
+					
 				} catch (Exception e) {
 					System.out.println("Lo sentimos pero el nombre ya existe, dime otro:");
-
+					
 				}
-
-			} while (continuar);
+				
+			} while(continuar);	
+				
 
 		} catch (Exception e) {
 
 			System.out.println("Tenemos un problema " + e.getMessage());
 
 		}
-
+		
 		System.out.println("Agur, nos vemos otro día");
 
 	}

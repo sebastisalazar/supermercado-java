@@ -1,4 +1,4 @@
-package com.ipartek.formacion;
+package com.ipartek.formacion.ejercicios.bbdd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

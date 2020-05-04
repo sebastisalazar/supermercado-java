@@ -1,4 +1,4 @@
-package com.ipartek.formacion;
+package com.ipartek.formacion.ejercicios.bbdd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,6 +30,7 @@ public class BuscarProductosPorNombre {
 				PreparedStatement pst = conexion.prepareStatement(sql);
 				pst.setString(1, "%" + nombre + "%");
 
+				//Siempre que usamos ExecuteQuery(); para SELECT y nos devuelve el resultado en Resulset
 				try (ResultSet rs = pst.executeQuery();) {
 
 					// Mostrando resultados
