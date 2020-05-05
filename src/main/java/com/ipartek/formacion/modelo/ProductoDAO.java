@@ -165,7 +165,7 @@ public class ProductoDAO implements CrudAble<Producto> {
 	}
 
 	/**
-	 * @param Recibe por parametro el ID, que es el que se buscara en la base de datos para borrar
+	 * @param Recibe por parametro el ID, que se buscara en la base de datos para borrar
 	 * @return Objeto producto con sus atributos id y nombre para hacer saber qué registro se ha borrado
 	 * @throws Mensaje en caso de que el id indicado a buscar no exista en la base de datos
 	 */
