@@ -1,6 +1,11 @@
 package com.ipartek.formacion.modelo;
 
 import java.sql.Connection;
+/**
+ * @author Sebastian Salazar
+ * @see https://github.com/sebastisalazar/supermercado-java/tree/master/src/main/java/com/ipartek/formacion/ejercicios/bbdd
+ * @see https://github.com/sebastisalazar/supermercado-java/blob/master/src/main/java/com/ipartek/formacion/modelo/ProductoDAO.java
+ */
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -120,8 +125,8 @@ public class ProductoDAO implements CrudAble<Producto> {
 
 	
 	/**
-	 * @param Recibe por parametro el ID, que el que se buscará en la base de datos
-	 * @return Objeto cuyo ID conincida con el pasasado por parametro 
+	 * @param Recibe por parametro el ID, el cual se buscará en la base de datos
+	 * @return Objeto cuyo ID coincida con el pasasado por parametro 
 	 * @throws Mensaje de excepcion si no se encuentran registros con el id indicado
 	 */
 	public Producto getById(int id) throws Exception {
