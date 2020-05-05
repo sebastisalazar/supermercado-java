@@ -18,13 +18,15 @@ public class ModificarProductoPorIdConDAO {
 			ProductoDAO dao = ProductoDAO.getInstance();
 			Producto p= new Producto();
 			
+			ListaProductos.listarProductos();
+			
 			System.out.print("\nDime el id a modificar:");
 			int id= Integer.parseInt(sc.nextLine());
-			System.out.println("Dime el nuevo nombre del producto");
+			System.out.print("\nDime el nuevo nombre del producto: ");
 			String nuevonombre=sc.nextLine();
 			p=dao.getById(id);
 			
-			System.out.print("\nEl producto:"+p.getNombre()+" con id "+p.getId()+" se ha modificado su nombre a -> "+nuevonombre);
+			System.out.print("\nEl producto: "+p.getNombre()+" con id "+p.getId()+" se ha modificado su nombre a -> "+nuevonombre);
 			p.setId(id);
 			p.setNombre(nuevonombre);
 			p=dao.update(p);

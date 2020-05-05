@@ -46,7 +46,7 @@ public class ProductoDAO implements CrudAble<Producto> {
 		
 				
 				ArrayList<Producto> registrosPorNombre = new ArrayList<Producto>();
-				Producto p = new Producto();
+				
 				
 				try (
 						Connection conexion = ConnectionManager.getConnection();
@@ -56,10 +56,8 @@ public class ProductoDAO implements CrudAble<Producto> {
 					pst.setString(1,"%"+nombre+"%");
 					try( ResultSet rs = pst.executeQuery() ){
 						
-						
-						
 							while (rs.next()) {
-								
+								Producto p = new Producto();
 								int id = rs.getInt("id");
 								String nombrep = rs.getString("nombre");
 								p.setNombre(nombrep);
@@ -72,15 +70,12 @@ public class ProductoDAO implements CrudAble<Producto> {
 							if (rs.last()==false) {
 								throw new Exception("No se han encontrado registros con el nombre "+nombre);
 							}
-						
-						
 					}	
 
 				} catch (Exception e) {
 					throw new Exception(e.getMessage());
 					
 				}
-				
 				return registrosPorNombre;
 	}
 	

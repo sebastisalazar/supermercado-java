@@ -18,10 +18,11 @@ public class BuscarProductosPorNombreConDAO {
 		try {
 			Scanner sc = new Scanner(System.in);
 			ProductoDAO dao = ProductoDAO.getInstance();
-			System.out.println("Dime nombre a buscar:");
+			System.out.print("Dime nombre a buscar:");
 			String nombreAbuscar = sc.nextLine();
 			ArrayList<Producto> productos = dao.getAllByNombre(nombreAbuscar);
 			
+			System.out.println("Producto/s encontrados con el nombre "+nombreAbuscar+":\n");
 			for (Producto p : productos) {
 				System.out.println(p);
 			}

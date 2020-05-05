@@ -18,11 +18,11 @@ public class BuscarProductosPorIDConDAO {
 		try {
 			Scanner sc = new Scanner(System.in);
 			ProductoDAO dao = ProductoDAO.getInstance();
-			System.out.println("Dime el id a buscar:");
+			System.out.print("Dime el id a buscar:");
 			int id = Integer.parseInt(sc.nextLine());
 			Producto p=new Producto();
 			p=dao.getById(id);
-			System.out.println(p);
+			System.out.println("\nProducto encontrado, nombre= "+p.getNombre()+" id= "+p.getId());
 			
 			
 		} catch (Exception e) {

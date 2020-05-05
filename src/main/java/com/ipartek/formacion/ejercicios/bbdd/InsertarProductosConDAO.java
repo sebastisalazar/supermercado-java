@@ -28,15 +28,15 @@ public class InsertarProductosConDAO {
 			ProductoDAO dao = ProductoDAO.getInstance();
 			Producto p= new Producto();
 			
-			System.out.println("Dime el nombre a introducir:");
+			System.out.print("Dime el nombre a introducir:");
 			p.setNombre(sc.nextLine());
 			dao.insert(p);
 			
-			System.out.println("El producto se ha insertado con exito, los datos son los siguientes");
+			System.out.println("\nEl producto se ha insertado con exito, los datos son los siguientes: ");
 			System.out.println(p);
 		} catch (Exception e) {
 			
-			System.out.println(e.getMessage());
+			System.out.println("\n"+e.getMessage());
 		}
 		
 	}

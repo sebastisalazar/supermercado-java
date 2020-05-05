@@ -14,6 +14,7 @@ public class EliminarProductoPorIdConDAO {
 	public static void main(String[] args) {
 
 		try {
+			ListaProductos.listarProductos();
 			Scanner sc = new Scanner(System.in);
 			ProductoDAO dao = ProductoDAO.getInstance();
 			Producto p= new Producto();
