@@ -68,7 +68,9 @@ public class ProductoDAO implements CrudAble<Producto> {
 
 				}
 
-				// si la SQL está bien pero no encuuentra ningun registro
+				/**
+				 * si la SQL está bien pero no encuuentra ningun registro
+				 */
 				if (rs.last() == false) {
 					throw new Exception("No se han encontrado registros con el nombre " + nombre);
 				}
