@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface CrudAble<P> {
 
 	
-	ArrayList<P> getAll();
+	ArrayList<P> getAll() throws Exception;
 	
 	P getById(int id) throws Exception;
 	
