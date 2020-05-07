@@ -76,6 +76,7 @@ public class GestionUsuarios {
 					seguir=false;//iniciliza a false para salir romper el bucle y salir
 					System.out.println("\n********************************");
 					System.out.println("\n\tFIN");
+					sc.close();
 				
 				}//fin switch
 			}//fin if
