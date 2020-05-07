@@ -123,11 +123,17 @@ public class GestionUsuarios {
 	static void buscarPorID() {
 		Usuario u = new Usuario();
 		boolean seguir=true;
+		int id=0;
 		do {
 			try {
 
-				System.out.print("Indica el id de usuario a buscar:");
-				int id = Integer.parseInt(sc.nextLine());
+				System.out.print("Indica el id de usuario a buscar: ");
+				try {
+					id = Integer.parseInt(sc.nextLine());
+				} catch (Exception e) {
+					throw new Exception("Error, has introducido una letra en lugar de un numero\n");
+				}
+				
 				u = dao.getById(id);
 				System.out.println("\n**************************");
 				System.out.println(" LISTA DE USUARIOS CON ID " + id + "\n");
