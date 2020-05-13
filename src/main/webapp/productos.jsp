@@ -7,19 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/productos.css">	
 <title>Productos</title>
-<style>
-
-		th{
-			background-color: black;
-			color: white;
-		}
-		td { border:1px solid black }
-		table{
-			border-collapse: collapse;
-			background-color: beige;
-		}
-	</style>
 </head>
 <body>
 

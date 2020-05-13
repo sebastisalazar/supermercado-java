@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/tablaAlumnos.css">	
 	<title>Alumnos</title>
 	<%
 	// recogemos la informacion "atributo" enviado desde el controlador
@@ -13,21 +14,6 @@
 
 	%>
 
-	<style>
-	
-		
-
-		tr th{
-			background-color: black;
-			color: white;
-		}
-		td { border:1px solid black }
-		table{
-			border-collapse: collapse;
-			background-color: beige;
-			
-		}
-	</style>
 </head>
 <body>
 

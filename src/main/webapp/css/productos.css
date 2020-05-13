@@ -1,0 +1,9 @@
+th{
+    background-color: black;
+    color: white;
+}
+td { border:1px solid black }
+table{
+    border-collapse: collapse;
+    background-color: beige;
+}
