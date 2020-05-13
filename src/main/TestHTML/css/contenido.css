@@ -1,0 +1,38 @@
+.parrafos{
+  display: flex;
+  margin: 5px;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+div img{
+  flex:1 2 20%;
+  margin-right: 30px;
+  width: 200px;
+  height: 200px;
+  
+}
+
+div p{
+  line-height: 30px;
+  text-align: justify
+}
+
+h1,h2,h3{
+  margin-right: 30px;
+}
+
+body{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+
+#contenedor{
+
+  width: 70%;
+}
