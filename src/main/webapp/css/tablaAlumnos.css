@@ -3,8 +3,14 @@ tr th{
     color: white;
 }
 td { border:1px solid black }
+
+tr{
+    background-color: beige;
+}
 table{
     border-collapse: collapse;
-    background-color: beige;
+    display: block;
+    width:20%;
+    height: 200px;
     
 }

@@ -20,7 +20,7 @@
 	<a href="index.jsp">VOLVER</a>
 	<br>
 	<h1>Tabla de alumnos</h1>
-	<table style="width:100%; border:1px solid black;">
+	<table >
 		<tr>
 		  <th>id</th>
 		  <th>Nombre</th>     

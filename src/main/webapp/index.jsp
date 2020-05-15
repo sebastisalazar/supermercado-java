@@ -16,7 +16,10 @@
 			  
 			  <p>
 				<a  class="boton" href="ver-tabla-alumnos"> Ver tabla alumnos </a>
+				<br>
 				<a class="boton" href="productos"> Ver tabla productos </a> 
+				<br>
+				<a class="boton" href="formulario-producto.jsp"> Crear productos </a> 
 			  </p>
 	 </div>
 </body>
