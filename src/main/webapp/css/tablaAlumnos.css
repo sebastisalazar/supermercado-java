@@ -1,16 +1,18 @@
-tr th{
+th{
     background-color: black;
     color: white;
+    border: 1px solid white;
+    width: 100px;
 }
-td { border:1px solid black }
+td { 
+    border:1px solid black;
+    width:120px;
+    padding: 10px;
+    
+}
 
-tr{
-    background-color: beige;
-}
 table{
     border-collapse: collapse;
-    display: block;
-    width:20%;
-    height: 200px;
-    
+    background-color: beige;
+    text-align: center;
 }
