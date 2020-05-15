@@ -1,0 +1,33 @@
+tr td{
+  text-align: center;
+  padding: 20px;
+}
+
+form{
+  height: 150px;
+  width: auto;
+  background-color: azure
+}
+
+input{
+  width: 20px
+}
+
+#nombre{
+  width: 200px;
+}
+
+h1{
+  text-align: center;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#boton{
+  width: 200px;
+}
