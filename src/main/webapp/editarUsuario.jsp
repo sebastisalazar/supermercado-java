@@ -11,7 +11,7 @@
 	<br>
 	<h1>Editar producto</h1>
     
-    <form action="editar-producto?id=<%= request.getParameter("id") %>&nombre=<%= request.getParameter("nombre") %>" method="POST">
+    <form action="editar-usuario?id=<%= request.getParameter("id") %>&nombre=<%= request.getParameter("nombre") %>" method="POST">
 
         <table>
             <tr>
@@ -21,7 +21,7 @@
             
             <tr>
                 
-                <td colspan="2"><input id="boton" type="submit" value="Actualizar producto"></td>
+                <td colspan="2"><input id="boton" type="submit" value="Actualizar usuario"></td>
             </tr>
         </table>
 

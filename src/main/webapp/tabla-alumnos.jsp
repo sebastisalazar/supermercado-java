@@ -20,10 +20,12 @@
 	<a href="index.jsp">VOLVER</a>
 	<br>
 	<h1>Tabla de alumnos</h1>
+	<p>${mensaje}</p>
 	<table >
 		<tr>
 		  <th>id</th>
-		  <th>Nombre</th>     
+		  <th>Nombre</th> 
+		  <th colspan="2">Opciones</th>    
 		</tr>
 		
 		<% for( Usuario u : alumnos ){ %>
@@ -31,6 +33,8 @@
 			<tr>
 				<td><%=u.getId()%></td>
 				<td><%=u.getNombre()%></td>
+				<td><a href="eliminar-alumno?id=<%= u.getId()%>&nombre=<%=u.getNombre()%>">Eliminar</a></td>
+				<td><a href="editarUsuario.jsp?id=<%= u.getId()%>&nombre=<%=u.getNombre()%>">Editar</a></td>
 			</tr>
 		
 		<% } %>

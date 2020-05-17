@@ -9,18 +9,24 @@
 </head>
 <body>
 
-	<div id="caja">
+	<div id="contenedor">
+		<div id="caja">
 			<a class="portada">
 			 <img  alt="imagen de inicio" src="images/IPARTEK.jpg">
 			</a>
 			  
-			  <p>
+			
 				<a  class="boton" href="ver-tabla-alumnos"> Ver tabla alumnos </a>
 				<br>
 				<a class="boton" href="productos"> Ver tabla productos </a> 
 				<br>
-				<a class="boton" href="formulario-producto.jsp"> Crear productos </a> 
-			  </p>
-	 </div>
+				<a class="boton" href="formulario-producto.jsp"> Crear productos </a>
+				<br>
+				<a class="boton" href="formulario-usuario.jsp"> Crear Usuarios </a> 
+			
+	 	</div>
+
+	</div>
+	
 </body>
 </html>
