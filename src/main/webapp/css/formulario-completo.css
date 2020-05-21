@@ -1,0 +1,26 @@
+th{
+  background-color: darkblue;
+  color:white;
+  width: auto;
+  border: 1px solid black
+}
+
+tr td{
+  border: 1px solid black;
+  text-align: center;
+  height: 80px;
+}
+
+table{
+  border-collapse: collapse;
+  width:60%;
+  height:100%;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}

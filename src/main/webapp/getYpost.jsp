@@ -18,17 +18,18 @@
 	<h2>Ejemplo POST</h2>
 	<p>Siempre es necesario un formulario, normalmente las peticiones POST sriven para crear o modificar recursos en el servidor.</p>
 	
-	<form action="sumar" method="post" >
+	<form action="sumar" method="post" novalidate >
 	
-		<input type="number" name="op1" value="${op1}" placeholder="introduce un numero">
+		<input type="number" name="op1" value="${op1}" placeholder="introduce un numero" novalidate>
 		<br>
-		<input type="number" name="op2" value="${op2}" placeholder="introduce otro numero">
+		<input type="number" name="op2" value="${op2}" placeholder="introduce otro numero" novalidate>
 		<br>
 		<input type="submit" value="Sumar">
 	
 	</form>
 	
 	<h2>RESULTADO</h2>
+	<span style="color:red">${mensaje}</span>
 	${resultado}
 	
 

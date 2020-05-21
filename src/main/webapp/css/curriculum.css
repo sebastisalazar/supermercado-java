@@ -1,0 +1,50 @@
+form{
+  background-color: cadetblue;
+  width: 40%;
+  height: auto;
+  margin: 50px 50px;
+  padding: 20px;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  margin: 15px 0;
+  display: inline-block;
+  width: 70%;
+}
+
+input[type=radio]{
+ margin: 10px 0;
+ width: 20%
+}
+
+input[type=checkbox]{
+ margin: 10px 0;
+ width: 20%
+}
+ 
+
+label{
+  display: inline-block;
+  width: 20%;
+  color:white;
+  font-weight: 600;
+}
+
+fieldset{
+  margin: 20px 0;
+  color:white;
+  font-weight: 600;
+}
+
+textarea{
+  margin: 20px auto;
+  width: 100%;
+  resize: none;
+}

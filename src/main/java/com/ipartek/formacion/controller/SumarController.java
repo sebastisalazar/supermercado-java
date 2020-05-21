@@ -27,7 +27,7 @@ public class SumarController extends HttpServlet {
 		
 		//Parsear a int y sumar
 	
-		String resultado =Integer.toString(Integer.parseInt(parametro1)+Integer.parseInt(parametro2));
+		int resultado =Integer.parseInt(parametro1)+Integer.parseInt(parametro2);
 		
 		
 		//volver a enviar los PARAMETROS recibido como ATRIBUTOS
@@ -46,16 +46,72 @@ public class SumarController extends HttpServlet {
 		//recoger parametros del formulario
 		String parametro1 = request.getParameter("op1");
 		String parametro2 = request.getParameter("op2");
-		
-		// Parsear a int y sumar
-		String resultado = Integer.toString(Integer.parseInt(parametro1)+Integer.parseInt(parametro2));;
-		
+		request.setAttribute("op1",request.getParameter("op1"));		
+		request.setAttribute("op2",request.getParameter("op2"));
+		String mensaje="";
+		int resultado=0;
 		//volver a enviar los PARAMETROS recibido como ATRIBUTOS
-		request.setAttribute("op1", parametro1);		
-		request.setAttribute("op2", parametro2);
 		
-		request.setAttribute("resultado", resultado);
-		request.getRequestDispatcher("getYpost.jsp").forward(request, response);
+		
+		try {
+			
+			
+			if (parametro1.equals("")==true && parametro2.equals("")==true) {
+				
+				throw new Exception("Campos en blanco");
+			}else {
+				
+					try {
+						
+						
+						resultado+=Integer.parseInt(parametro1);
+						if (parametro1.equals("")==true) {
+							
+							throw new Exception("Error, el primer campo está en blanco");
+							
+						}
+					} catch (Exception e) {
+						throw new Exception("El primer campo no contiene un numero");
+					}
+				
+				
+					try {
+						resultado+=Integer.parseInt(parametro2);
+						
+						if (parametro2.equals("")==true ) {
+							
+							throw new Exception("Error, el segundo campo está en blanco");
+			
+						}
+						
+						
+					} catch (Exception e) {
+						throw new Exception("El segundo campo no contiene un numero");
+					}
+				
+			
+					request.setAttribute("resultado", resultado);
+			}
+			
+			
+			
+				
+			
+
+			
+				
+		}catch(Exception e) {
+			
+			mensaje=e.getMessage();
+			request.setAttribute("mensaje", mensaje);
+			
+		}finally {
+			
+			request.getRequestDispatcher("getYpost.jsp").forward(request, response);
+		}
+		
+
+		
 	}
 
 }

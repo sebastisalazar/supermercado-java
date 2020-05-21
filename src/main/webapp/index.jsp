@@ -15,8 +15,8 @@
 			 <img  alt="imagen de inicio" src="images/IPARTEK.jpg">
 			</a>
 			  
-			<a href="getYpost.jsp">GET y POST</a>
-			<a href="formulario.jsp">Ejemplo Formulario Completo</a>
+			<a class="boton" href="getYpost.jsp">GET y POST</a>
+			<a class="boton" href="formulario.jsp">Ejemplo Formulario Completo</a>
 				<a  class="boton" href="ver-tabla-alumnos"> Ver tabla alumnos </a>
 				<br>
 				<a class="boton" href="productos"> Ver tabla productos </a> 
