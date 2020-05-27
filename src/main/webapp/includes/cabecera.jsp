@@ -13,13 +13,14 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
     <!-- Estilos extras-->
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" type="text/css" href="css/productos.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     
     <link rel="stylesheet" type="text/css" href="css/index2.css">
-    <link rel="stylesheet" href="css/curriculum2.css">	
+    <link rel="stylesheet" type="text/css" href="css/curriculum2.css">
+    <link rel="stylesheet" type="text/css" href="css/productos.css">
 
+    <link rel="stylesheet" href="css/formulario-resumen2.css">
 
     <title>Inicio</title>
   </head>
@@ -29,7 +30,7 @@
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top pl-5 pr-5">
 
-          <a class="navbar-brand" href="index.html"><img src="img/logoEmpresa.gif" alt="logo"></a>
+          <a class="navbar-brand" href="index.jsp"><img src="img/logoEmpresa.gif" alt="logo"></a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

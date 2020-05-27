@@ -1,8 +1,8 @@
 .formulario-cv{
   background-color: cadetblue;
-  width: 40%;
+  width: 50%;
   height: auto;
-  margin: 50px 50px;
+  margin: auto;
   padding: 20px;
 }
 
@@ -24,17 +24,22 @@ input[type=checkbox]{
 }
  
 
-label{
+.etiquetaCV{
   display: inline-block;
   width: 20%;
   color:white;
   font-weight: 600;
 }
 
+.formulario-cv fieldset legend{
+  font-size: 1rem;
+}
+
 fieldset{
   margin: 20px 0;
   color:white;
   font-weight: 600;
+  border:solid white 1px;
 }
 
 textarea{
