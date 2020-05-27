@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="index.jsp">VOLVER</a>
+    <a href="index2.jsp">VOLVER</a>
 	<br>
 	<h1>Crear usuario</h1>
 	<p>${mensaje}</p>

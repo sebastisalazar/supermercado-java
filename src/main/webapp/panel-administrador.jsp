@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%! String title = "Login";  %>
+<%@include file="includes/cabecera.jsp" %>
+
+	<div id="contenedor">
+		<div id="caja">
+			
+			<h1 class="text-primary text-center pt-20 d-block" style="flex: 0 1 100%;">Panel de control</h1><br>
+			<a class="boton" href="getYpost2.jsp">GET y POST</a>
+			<a class="boton" href="formulario2.jsp">Ejemplo Formulario Completo</a>
+				<a  class="boton" href="lista-usuarios"> Ver tabla usuarios </a>
+				<br>
+				<a class="boton" href="lista-productos"> Ver tabla productos </a> 
+				<br>
+				<a class="boton" href="formulario-producto2.jsp"> Crear productos </a>
+				<br>
+				<a class="boton" href="formulario-usuario2.jsp"> Crear Usuarios </a> 
+			
+	 	</div>
+
+	</div>
+	
+
+<%@include file="includes/pie.jsp" %>

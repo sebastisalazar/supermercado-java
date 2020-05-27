@@ -13,45 +13,42 @@ import com.ipartek.formacion.modelo.Usuario;
 import com.ipartek.formacion.modelo.UsuarioDAOImpl;
 
 /**
- * Servlet implementation class EliminarAlumnosController
+ * Servlet implementation class TablaAlumnosController
  */
-@WebServlet("/eliminar-alumno")
-public class EliminarAlumnosController extends HttpServlet {
+@WebServlet("/ver-tabla-usuarios")
+public class TablaUsuariosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
+   
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mensaje="";
-		ArrayList<Usuario> alumnos= new ArrayList<>();
-		try {
-			String ids= request.getParameter("id");
-			int id= Integer.parseInt(ids);
-			UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
-			dao.delete(id);
-			
-			
-			alumnos=dao.getAll();
-			
-			
-			mensaje="Usuario borrado correctamente";
-			
-			
-			
-		} catch (Exception e) {
-			mensaje="Error, no se ha podido eliminar el usuario. "+e.getMessage();
-			e.printStackTrace();
-		}
-		request.setAttribute("alumnos", alumnos);
-		request.setAttribute("mensaje", mensaje);
-		request.getRequestDispatcher("tabla-alumnos.jsp").forward(request, response);
+		doPost(request, response);
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// conseguir los alumnos de la bbdd
 		
+				UsuarioDAOImpl dao = UsuarioDAOImpl.getInstance();		
+				ArrayList<Usuario> alumnos=null;
+				try {
+					alumnos = dao.getAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// enviar la informacion a la vista		
+				request.setAttribute( "alumnos" , alumnos );
+				
+				// ir a la nueva vista o jsp
+				request.getRequestDispatcher("tabla-usuarios.jsp").forward(request, response);
+				
 	}
 
 }

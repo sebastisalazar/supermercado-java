@@ -1,18 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="css/curriculum.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%! String title = "Productos";  %>
+<%@include file="includes/cabecera.jsp" %>
+
+
+<div class="container pt-5">
+
 	<h1>CV</h1>
 	
-   <a href="index2.jsp">Volver a inicio</a>
+   <p class="text-center mb-5">
+          <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
+   </p>
 	<c:if test="${not empty requeridos}">
 		<div>
 			<ul>
@@ -25,7 +23,7 @@
 	</c:if>
 	
 	
-	<form action="formulario-completo" method="post">
+	<form action="formulario-completo" class="formulario-cv" method="post">
 
 		<label for="nombre">Nombre</label><input type="text" name="nombre" placeholder="Introduce tu nombre" id="nombre" value="${nombre}">
 		<br>
@@ -87,10 +85,7 @@
         
 		
 	</form>
+</div>
 
 
-
-	
-	
-</body>
-</html>
+<%@include file="includes/pie.jsp" %>

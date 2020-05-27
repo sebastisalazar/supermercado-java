@@ -15,8 +15,8 @@ import com.ipartek.formacion.modelo.UsuarioDAOImpl;
 /**
  * Servlet implementation class EditarUsuarioController
  */
-@WebServlet("/editar-usuario")
-public class EditarUsuarioController extends HttpServlet {
+@WebServlet("/editar-usu")
+public class EditarUsuarioController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
@@ -42,14 +42,14 @@ public class EditarUsuarioController extends HttpServlet {
 		u.setId(id);
 		
 		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
-		ArrayList<Usuario> alumnos= new ArrayList<Usuario>();
+		ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
 		
 		String mensaje="";
 		
 		try {
 			
 			u=dao.update(u);
-			alumnos=dao.getAll();
+			usuarios=dao.getAll();
 			mensaje="Usuario actualizado correctamente";
 		} catch (Exception e) {
 			mensaje="Error, no se ha podido actualizar el usuario. "+e.getMessage();
@@ -59,8 +59,8 @@ public class EditarUsuarioController extends HttpServlet {
 		
 		
 		request.setAttribute("mensaje",mensaje);
-		request.setAttribute("alumnos",alumnos);
-		request.getRequestDispatcher("tabla-usuarios.jsp").forward(request, response);
+		request.setAttribute("usuarios",usuarios);
+		request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
 	}
 
 }

@@ -13,54 +13,42 @@ import com.ipartek.formacion.modelo.Usuario;
 import com.ipartek.formacion.modelo.UsuarioDAOImpl;
 
 /**
- * Servlet implementation class EditarUsuarioController
+ * Servlet implementation class TablaAlumnosController
  */
-@WebServlet("/editar-usuario")
-public class EditarUsuarioController extends HttpServlet {
+@WebServlet("/lista-usuarios")
+public class TablaUsuariosController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+   
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+		doPost(request, response);
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nuevoNombre=request.getParameter("nombrenuevo");
-		String ids= request.getParameter("id");
-		int id= Integer.parseInt(ids);
+		// conseguir los alumnos de la bbdd
 		
-		Usuario u= new Usuario();
-		u.setNombre(nuevoNombre);
-		u.setId(id);
-		
-		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
-		ArrayList<Usuario> alumnos= new ArrayList<Usuario>();
-		
-		String mensaje="";
-		
-		try {
-			
-			u=dao.update(u);
-			alumnos=dao.getAll();
-			mensaje="Usuario actualizado correctamente";
-		} catch (Exception e) {
-			mensaje="Error, no se ha podido actualizar el usuario. "+e.getMessage();
-			e.printStackTrace();
-		}
-		
-		
-		
-		request.setAttribute("mensaje",mensaje);
-		request.setAttribute("alumnos",alumnos);
-		request.getRequestDispatcher("tabla-usuarios.jsp").forward(request, response);
+				UsuarioDAOImpl dao = UsuarioDAOImpl.getInstance();		
+				ArrayList<Usuario> usuarios=null;
+				try {
+					usuarios = dao.getAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// enviar la informacion a la vista		
+				request.setAttribute("usuarios", usuarios );
+				
+				// ir a la nueva vista o jsp
+				request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
+				
 	}
 
 }

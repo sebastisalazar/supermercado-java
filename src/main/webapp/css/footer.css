@@ -1,0 +1,13 @@
+.lista-footer li{
+    text-decoration: none;
+    list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.text-bright-red{
+    color:#f70b26;
+}
+.bg-bright-red{
+    background-color:#f70b26;
+}

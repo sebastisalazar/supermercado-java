@@ -1,19 +1,38 @@
-th{
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-    width: 100px;
+
+.strikethrough {
+    position: relative;
+    font-size: 12px;
+  
+  }
+
+.strikethrough:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
 }
-td { 
-    border:1px solid black;
-    width:120px;
-    padding: 10px;
-    
+
+.descuento{
+    left:5px;
+    top:5px;
+    background-color:#f70b26;
+}
+
+.text-bright-red{
+    color:#f70b26;
+}
+.bg-bright-red{
+    background-color:#f70b26;
 }
 
 
-table{
-    border-collapse: collapse;
-    background-color: beige;
-    text-align: center;
-}

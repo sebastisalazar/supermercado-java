@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/productos.css">	
+<link rel="stylesheet" type="text/css" href="css/productos2.css">	
 <title>Productos</title>
 </head>
 <body>
 
 
-<a href="index.jsp">VOLVER</a>
+<a href="index2.jsp">VOLVER</a>
 <br>	
 	<h1>Listado Productos</h1>
 	<p>${mensaje}</p>

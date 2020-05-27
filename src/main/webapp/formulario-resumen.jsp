@@ -65,7 +65,7 @@
             <td colspan="5">
 
                 <input type="submit" value="Editar CV">
-                <a href="index.jsp">Ir a inicio</a>
+                <a href="index2.jsp">Ir a inicio</a>
 
             </td>
             
