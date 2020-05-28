@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%! String title = "Productos";  %>
-<%@include file="includes/cabecera.jsp" %>
+<jsp:include page="includes/cabecera.jsp" >
+ 
+<jsp:param name="pagina" value="Usuarios" />
+ 
+<jsp:param name="title" value="Usuarios" /> 
+ 
+</jsp:include>
 
 
 <div class="container pt-5">
@@ -18,8 +23,8 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
-                <th   scope="col"> </th>
-                <th   scope="col"> </th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -27,8 +32,17 @@
 				<tr>
 					<td>${u.id}</td> <% // no hace falta usar el getter p.id == p.getId() %>
 					<td>${u.nombre}</td>
-					<td><a href="eliminar-usu?id=${u.id}">ELIMINAR</a></td>
-					<td><a href="editarUsuario2.jsp?id=${u.id}&nombre=${u.nombre}">EDITAR</a></td>
+					<td>
+						<a href="eliminar-usu?id=${u.id}">
+							<i class="fas fa-trash"></i>
+						</a>
+					</td>
+					<td>
+						<a href="editarUsuario2.jsp?id=${u.id}&nombre=${u.nombre}">
+							<i class="fas fa-edit"></i>
+						</a>
+					
+					</td>
 				</tr>
 			  </c:forEach>
 			  

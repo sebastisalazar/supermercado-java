@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 
 
@@ -26,7 +26,7 @@ public class ListaProductosUsandoDAO {
 	public static void main(String[] args) {
 		
 		// ProductoDAO dao = new ProductoDAO(); 
-		ProductoDAO dao = ProductoDAO.getInstance();
+		ProductoDAOImp dao = ProductoDAOImp.getInstance();
 		
 		ArrayList<Producto> productos = dao.getAll();
 		

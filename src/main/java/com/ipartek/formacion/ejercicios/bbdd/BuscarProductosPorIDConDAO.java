@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 public class BuscarProductosPorIDConDAO {
 	
@@ -17,7 +17,7 @@ public class BuscarProductosPorIDConDAO {
 
 		try {
 			Scanner sc = new Scanner(System.in);
-			ProductoDAO dao = ProductoDAO.getInstance();
+			ProductoDAOImp dao = ProductoDAOImp.getInstance();
 			System.out.print("Dime el id a buscar:");
 			int id = Integer.parseInt(sc.nextLine());
 			Producto p=new Producto();

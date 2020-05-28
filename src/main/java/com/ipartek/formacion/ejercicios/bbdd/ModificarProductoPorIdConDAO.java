@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 public class ModificarProductoPorIdConDAO {
 
@@ -15,7 +15,7 @@ public class ModificarProductoPorIdConDAO {
 	
 		try {
 			Scanner sc = new Scanner(System.in);
-			ProductoDAO dao = ProductoDAO.getInstance();
+			ProductoDAOImp dao = ProductoDAOImp.getInstance();
 			Producto p= new Producto();
 			
 			ListaProductos.listarProductos();

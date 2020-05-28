@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 public class BuscarProductosPorNombreConDAO {
 	
@@ -17,7 +17,7 @@ public class BuscarProductosPorNombreConDAO {
 
 		try {
 			Scanner sc = new Scanner(System.in);
-			ProductoDAO dao = ProductoDAO.getInstance();
+			ProductoDAOImp dao = ProductoDAOImp.getInstance();
 			System.out.print("Dime nombre a buscar:");
 			String nombreAbuscar = sc.nextLine();
 			ArrayList<Producto> productos = dao.getAllByNombre(nombreAbuscar);

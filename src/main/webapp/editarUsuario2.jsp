@@ -6,7 +6,7 @@
 <div class="container pt-5">
     <h1 class="text-primary text-center mb-5">Editar Usuario</h1>
         <p class="text-center mb-5">
-          <a href="lista-productos" class="btn bg-primary text-white">Ver todos los usuarios</a>
+          <a href="lista-usuarios" class="btn bg-primary text-white">Ver todos los usuarios</a>
           <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
     	</p>
     

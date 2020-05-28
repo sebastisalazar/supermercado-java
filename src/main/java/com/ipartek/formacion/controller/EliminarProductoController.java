@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 /**
  * Servlet implementation class EliminarProductoController
@@ -27,7 +27,7 @@ public class EliminarProductoController extends HttpServlet {
 		String ids=request.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
-		ProductoDAO dao= ProductoDAO.getInstance();
+		ProductoDAOImp dao= ProductoDAOImp.getInstance();
 		Producto p= new Producto();
 		
 		String mensaje="";

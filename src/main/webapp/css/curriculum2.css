@@ -6,27 +6,20 @@
   padding: 20px;
 }
 
-
-input{
-  margin: 15px 0;
-  display: inline-block;
-  width: 70%;
+.btnCV{
+	width:60%;
 }
 
-input[type=radio]{
- margin: 10px 0;
- width: 20%
-}
 
-input[type=checkbox]{
- margin: 10px 0;
- width: 20%
+.etiquetaCVRadio{
+ margin-left:20px;
 }
  
 
 .etiquetaCV{
   display: inline-block;
-  width: 20%;
+  margin: 15px ;
+  width: 30%;
   color:white;
   font-weight: 600;
 }
@@ -40,6 +33,7 @@ fieldset{
   color:white;
   font-weight: 600;
   border:solid white 1px;
+  padding-left:15px;
 }
 
 textarea{

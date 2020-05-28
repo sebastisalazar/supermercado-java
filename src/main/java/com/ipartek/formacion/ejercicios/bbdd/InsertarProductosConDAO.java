@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class InsertarProductosConDAO {
 
 		try {
 			Scanner sc = new Scanner(System.in);
-			ProductoDAO dao = ProductoDAO.getInstance();
+			ProductoDAOImp dao = ProductoDAOImp.getInstance();
 			Producto p= new Producto();
 			
 			System.out.print("Dime el nombre a introducir:");

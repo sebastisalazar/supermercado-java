@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 /**
  * Servlet implementation class CrearProductoController
@@ -25,7 +25,7 @@ public class CrearProductoController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//para conseguir los datos de la base de datos
-		  ProductoDAO dao= ProductoDAO.getInstance();
+		  ProductoDAOImp dao= ProductoDAOImp.getInstance();
 		  Producto p= new Producto();
 		  String nombre=request.getParameter("nombre");
 		  p.setNombre(nombre);

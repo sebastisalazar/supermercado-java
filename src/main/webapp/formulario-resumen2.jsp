@@ -6,7 +6,13 @@
 	String title = "Productos";  
 
 %>
-<%@include file="includes/cabecera.jsp" %>
+<jsp:include page="includes/cabecera.jsp" >
+ 
+<jsp:param name="pagina" value="Administrador" />
+ 
+<jsp:param name="title" value="Administrador" /> 
+ 
+</jsp:include>
 
 	    
 

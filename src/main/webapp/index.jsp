@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%! String title = "Inicio";  %>
-<%@include file="includes/cabecera.jsp" %>
+<jsp:include page="includes/cabecera.jsp" >
+ 
+<jsp:param name="pagina" value="Inicio" />
+ 
+<jsp:param name="title" value="Inicio" /> 
+ 
+</jsp:include>
  
  
  <div class="container ">

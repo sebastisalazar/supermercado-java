@@ -12,17 +12,28 @@
     <!-- datatables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
-    <!-- Estilos extras-->
+    <!-- Estilos para la cabecera-->
     <link rel="stylesheet" type="text/css" href="css/nav.css">
+    
+    <!-- Estilos para el footer-->
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     
+    <!-- Estilio inicio -->
     <link rel="stylesheet" type="text/css" href="css/index2.css">
+    
+    <!-- Estilio para el curriculum -->
     <link rel="stylesheet" type="text/css" href="css/curriculum2.css">
+    
+    <!-- Estilio para la CARD de INICIO -->
     <link rel="stylesheet" type="text/css" href="css/productos.css">
 
+	<!-- Estilio para el formulario completado -->
     <link rel="stylesheet" href="css/formulario-resumen2.css">
-
-    <title>Inicio</title>
+    
+    <!-- Estilio para tablas -->
+    <link rel="stylesheet" href="css/tabla.css">
+    
+    <title>${param.title} | Supermercado</title>
   </head>
   <body>
     <header class="mb-5">
@@ -37,11 +48,19 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Productos</a>
+              <li class="nav-item ${ ( 'Inicio' eq param.pagina ) ? 'active' : '' } ">
+                <a class="nav-link" href="index.jsp">Inicio</a>
               </li>
             
-              <li class="nav-item">
+              <li class="nav-item ${ ( 'Productos' eq param.pagina ) ? 'active' : '' } }">
+                <a class="nav-link" href="lista-productos" tabindex="-1" aria-disabled="true">Productos</a>
+              </li>
+              
+              <li class="nav-item ${ ( 'Usuarios' eq param.pagina ) ? 'active' : '' } }">
+                <a class="nav-link" href="lista-usuarios" tabindex="-1" aria-disabled="true">Usuarios</a>
+              </li>
+              
+              <li class="nav-item ${ ( 'Administrador' eq param.pagina ) ? 'active' : '' } }">
                 <a class="nav-link" href="login.jsp" tabindex="-1" aria-disabled="true">Administrador</a>
               </li>
             </ul>

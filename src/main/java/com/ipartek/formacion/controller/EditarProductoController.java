@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 /**
  * Servlet implementation class EditarProductoController
@@ -46,7 +46,7 @@ public class EditarProductoController extends HttpServlet {
 		
 		String mensaje="";
 		
-		ProductoDAO dao= ProductoDAO.getInstance();
+		ProductoDAOImp dao= ProductoDAOImp.getInstance();
 		try {
 			dao.update(p);
 			mensaje="Producto editado satisfactoriamente.";

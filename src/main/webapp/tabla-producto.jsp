@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%! String title = "Productos";  %>
-<%@include file="includes/cabecera.jsp" %>
+<jsp:include page="includes/cabecera.jsp" >
+ 
+<jsp:param name="pagina" value="Productos" />
+ 
+<jsp:param name="title" value="Productos" /> 
+ 
+</jsp:include>
 
 
 <div class="container pt-5">
@@ -22,8 +27,8 @@
                 <th scope="col">Descuento</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Imagen</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -34,9 +39,19 @@
 					<td>    -      </td>
 					<td>    -      </td>
 					<td>    -      </td>
-					<td><img src="https://picsum.photos/75/75" alt="imagen aleatoria"></td>
-					<td><a href="eliminar-prod?id=${p.id}">ELIMINAR</a></td>
-					<td><a href="editarProducto2.jsp?id=${p.id}&nombre=${p.nombre}">EDITAR</a></td>
+					<td>
+						<img src="https://picsum.photos/75/75" alt="imagen aleatoria">
+					</td>
+					<td>
+						<a href="eliminar-prod?id=${p.id}">
+							<i class="fas fa-trash"></i>
+						</a>
+					</td>
+					<td>
+						<a href="editarProducto2.jsp?id=${p.id}&nombre=${p.nombre}">
+							<i class="fas fa-edit"></i>
+						</a>
+					</td>
 				</tr>
 			  </c:forEach>
              

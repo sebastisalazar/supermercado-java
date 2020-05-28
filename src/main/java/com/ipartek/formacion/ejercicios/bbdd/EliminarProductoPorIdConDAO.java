@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.Producto;
-import com.ipartek.formacion.modelo.ProductoDAO;
+import com.ipartek.formacion.modelo.ProductoDAOImp;
 
 public class EliminarProductoPorIdConDAO {
 
@@ -16,7 +16,7 @@ public class EliminarProductoPorIdConDAO {
 		try {
 			ListaProductos.listarProductos();
 			Scanner sc = new Scanner(System.in);
-			ProductoDAO dao = ProductoDAO.getInstance();
+			ProductoDAOImp dao = ProductoDAOImp.getInstance();
 			Producto p= new Producto();
 			
 			System.out.print("\nDime el id a borrar:");

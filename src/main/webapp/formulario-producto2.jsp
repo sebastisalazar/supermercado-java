@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%! String title = "Productos";  %>
-<%@include file="includes/cabecera.jsp" %>
+<jsp:include page="includes/cabecera.jsp" >
+ 
+<jsp:param name="pagina" value="Productos" />
+ 
+<jsp:param name="title" value="Crear producto" /> 
+ 
+</jsp:include>
 
 	<div class="container pt-5">
 	    <h1 class="text-primary text-center mb-5">Registrar nuevo producto</h1>
