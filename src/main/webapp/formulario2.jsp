@@ -95,4 +95,4 @@
 </div>
 
 
-<%@include file="includes/pie.jsp" %>
+<jsp:include page="includes/pie.jsp"/> 

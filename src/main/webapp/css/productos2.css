@@ -12,8 +12,9 @@ td {
 }
 
 
-table{
+.table{
     border-collapse: collapse;
-    background-color: beige;
     text-align: center;
+    width:100%;
 }
+

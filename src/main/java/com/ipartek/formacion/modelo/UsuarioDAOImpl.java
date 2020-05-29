@@ -24,11 +24,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return INSTANCE;
 	}
 
-	private final String SQL_GETALL = "SELECT id,nombre FROM usuario";
-	private final String SQL_GETBYID = "SELECT id,nombre FROM usuario WHERE id=?";
+	private final String SQL_GETALL = "SELECT id,nombre, contrasenia, id_rol FROM usuario";
+	private final String SQL_GETBYID = "SELECT id, nombre, contrasenia, id_rol FROM supermercado.usuario WHERE id=?";
 	private final String SQL_DELETEBYID = "DELETE FROM usuario WHERE id=?";
 	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia,id_rol) VALUES(?,'12345',1)";
-	private final String SQL_UPDATE= "UPDATE usuario SET nombre=? WHERE id=?";
+	private final String SQL_UPDATE= "UPDATE usuario SET nombre=?, contrasenia=?, id_rol=? WHERE id=?";
 	private final String SQL_GETBYNAME= "SELECT id,nombre FROM usuario WHERE nombre LIKE ?";
 
 	/**
@@ -38,17 +38,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public ArrayList<Usuario> getAll() throws Exception {
 
-		ArrayList<Usuario> registros = new ArrayList<Usuario>();
-
-		try (Connection con = ConnectionManager.getConnection();
+		//Arraylist vacio para guardar todos los usuarios
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		
+		try (
+				Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(SQL_GETALL);
-				ResultSet rs = pst.executeQuery();) {
+				ResultSet rs = pst.executeQuery();
+		) {
 
 			while (rs.next()) {
-				Usuario u = new Usuario();
-				u.setId(rs.getInt("id"));
-				u.setNombre(rs.getString("nombre"));
-				registros.add(u);
+				
+				//Usuario sin atributos
+				Usuario usuario = new Usuario();
+				
+				//asignacion de atributos al objeto vacio
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setContrasenia(rs.getString("contrasenia"));
+				usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
+				
+				//se añade al arraylist el usuario
+				usuarios.add(usuario);
 
 			}
 
@@ -56,7 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new Exception(e.getMessage());
 		}
 
-		return registros;
+		return usuarios;
 
 	}
 
@@ -68,19 +79,25 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario getById(int id) throws Exception {
 
-		Usuario u = new Usuario();
+		//Iniciliazacion de usuario vacio
+		Usuario usuario = new Usuario();
 
 		try (
 				Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(SQL_GETBYID);
 
 		) {
+			//se especifica el usuario con id que queremos
 			pst.setInt(1, id);
+			
+			//Ejecucion del select
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
-					u.setId(rs.getInt("id"));
-					u.setNombre(rs.getString("nombre"));
+					usuario.setId(rs.getInt("id"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setContrasenia(rs.getString("contrasenia"));
+					usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
 
 				}
 
@@ -94,7 +111,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new Exception(e.getMessage());
 		}
 
-		return u;
+		return usuario;
 	}
 
 	/**
@@ -175,7 +192,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		){
 			
 			pst.setString(1,pojo.getNombre());
-			pst.setInt(2, pojo.getId());
+			pst.setString(2,pojo.getContrasenia());
+			pst.setInt(3, pojo.getId_rol());
+			pst.setInt(4, pojo.getId());
+			
 			int filaActualizada=pst.executeUpdate();
 			
 			if (filaActualizada==2) {

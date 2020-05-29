@@ -9,6 +9,9 @@
 </jsp:include>
 
 	<div class="container pt-5">
+	
+		<jsp:include page="includes/alerta.jsp"></jsp:include>
+		
 	    <h1 class="text-primary text-center mb-5">Registrar nuevo producto</h1>
         <p class="text-center mb-5">
           <a href="lista-productos" class="btn bg-primary text-white">Ver todos los productos</a>
@@ -18,28 +21,48 @@
 		<p>${mensaje}</p>
 	    
 	    
-	    <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-				<tr>
-					<form action="crear-prod" method="post">
-						<td>
-							<input type="text" name="nombre" placeholder="Introduce el nombre del producto">
-						</td> 
-						<td>
-							<input type="submit" value="Crear">
-						</td>
-					</form>
-				</tr>
-            </tbody>
-         </table>
+	    <div class="container">   
+			<form action="crear-prod" method="POST">
+				<table class="tabla table">
+					<thead>
+						<th scope="col">Nombre</th>
+						<th scope="col">Imagen del producto</th>
+					</thead>
+					
+				  	<tbody>
+						
+						<tr>				
+							<td>
+								<input class="text-center" id="nombre" type="text" name="nombre" placeholder="Nombre del producto">
+							</td>
+							<td rowspan="3">
+								
+								<input id="foto" type="file" name="foto" >
+							
+							</td>
+						</tr>
+						
+										
+						<tr>
+							<th scope="col">Precio</th>
+						</tr>
+						<tr>
+							<td>
+								<input class="text-center" id="precio" type="number" step="any" name="precio" placeholder="€">
+							</td>
+						</tr>
+											
+						<tr>
+							<td colspan="5"><input class="btn btn-primary" id="boton" type="submit" value="Crear producto"></td>
+						</tr>
+								
+
+					</tbody>
+				</table>
+			</form>	
+		</div>
 	    
 	    
 	</div>
 	
-<%@include file="includes/pie.jsp" %>
+<jsp:include page="includes/pie.jsp"/> 

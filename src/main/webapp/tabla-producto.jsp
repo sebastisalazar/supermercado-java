@@ -10,6 +10,8 @@
 
 
 <div class="container pt-5">
+
+		<jsp:include page="includes/alerta.jsp"></jsp:include>
      
         <h1 class="text-primary text-center mb-5">Lista de productos</h1>
         <p class="text-center mb-5">
@@ -17,7 +19,7 @@
        	  <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
         </p>
 		
-		<p>${mensaje}</p>
+		
         <table class="tabla table table-striped">
             <thead>
               <tr>
@@ -36,11 +38,11 @@
 				<tr>
 					<td>${p.id}</td> <% // no hace falta usar el getter p.id == p.getId() %>
 					<td>${p.nombre}</td>
-					<td>    -      </td>
+					<td>${p.precio} €</td>
 					<td>    -      </td>
 					<td>    -      </td>
 					<td>
-						<img src="https://picsum.photos/75/75" alt="imagen aleatoria">
+						<img src="${p.foto}" alt="foto del producto">
 					</td>
 					<td>
 						<a href="eliminar-prod?id=${p.id}">
@@ -48,7 +50,7 @@
 						</a>
 					</td>
 					<td>
-						<a href="editarProducto2.jsp?id=${p.id}&nombre=${p.nombre}">
+						<a href="editar-prod?id=${p.id}">
 							<i class="fas fa-edit"></i>
 						</a>
 					</td>
@@ -61,4 +63,4 @@
     </div>
 
 
-<%@include file="includes/pie.jsp" %> 
+<jsp:include page="includes/pie.jsp"/> 

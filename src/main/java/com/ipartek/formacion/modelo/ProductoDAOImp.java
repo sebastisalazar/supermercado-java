@@ -29,12 +29,14 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 		return INSTANCE;
 	}
 
-	private final String SQL_GET_ALL = " SELECT id, nombre FROM producto ORDER BY id DESC; ";
-	private final String SQL_INSERT = "INSERT INTO producto(nombre, id_usuario) VALUES(?,1)";
+	private final String SQL_GET_ALL = "SELECT id, nombre, foto, precio  FROM producto ORDER BY id DESC; ";
+	private final String SQL_INSERT = "INSERT INTO producto(nombre, id_usuario, foto, precio) VALUES(?,1,?,?)";
 	private final String SQL_SELECTBYBOMBRE = "SELECT id, nombre FROM supermercado.producto WHERE nombre LIKE ?;";
-	private final String SQL_SELECTBYID = "SELECT id, nombre FROM supermercado.producto WHERE id=?;";
+	private final String SQL_SELECTBYID = "SELECT id, nombre, foto, precio FROM producto WHERE id = ? ; ";
 	private final String SQL_DELETE = "DELETE FROM producto WHERE id=?";
-	private final String SQL_UPDATE = "UPDATE supermercado.producto SET nombre=? WHERE id=?";
+	private final String SQL_UPDATE = "UPDATE supermercado.producto SET nombre=?, foto=?, precio=? WHERE id=?";
+	
+
 
 	/**
 	 * 
@@ -62,8 +64,13 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 					Producto p = new Producto();
 					int id = rs.getInt("id");
 					String nombrep = rs.getString("nombre");
+					String foto = rs.getString("imagen");
+					float precio = rs.getFloat("precio");
+					
 					p.setNombre(nombrep);
 					p.setId(id);
+					p.setFoto(foto);
+					p.setPrecio(precio);
 					registrosPorNombre.add(p);
 
 				}
@@ -98,12 +105,17 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 		) {
 
 			while (rs.next()) {
-
+				
+				Producto p = new Producto();
 				int id = rs.getInt("id");
 				String nombre = rs.getString("nombre");
-
-				Producto p = new Producto(nombre);
+				String foto = rs.getString("foto");
+				float precio = rs.getFloat("precio");
+				
+				p.setNombre(nombre);
 				p.setId(id);
+				p.setFoto(foto);
+				p.setPrecio(precio);
 
 				// guardar en lista
 				registros.add(p);
@@ -139,6 +151,8 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 
 					p.setId(rs.getInt("id"));
 					p.setNombre(rs.getString("nombre"));
+					p.setFoto(rs.getString("foto"));
+					p.setPrecio(rs.getFloat("precio"));
 
 				}
 
@@ -203,6 +217,8 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 				PreparedStatement pst = conexion.prepareStatement(SQL_INSERT,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			pst.setString(1, pojo.getNombre());
+			pst.setString(2, pojo.getFoto());
+			pst.setFloat(3, pojo.getPrecio());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 
@@ -232,14 +248,22 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 	 */
 	public Producto update(Producto pojo) throws Exception {
 
-		try (Connection con = ConnectionManager.getConnection();
+		
+		try (
+				
+				Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(SQL_UPDATE);
 				Scanner sc = new Scanner(System.in);
 
 		) {
-
+			
+			
+			
 			pst.setString(1, pojo.getNombre());
-			pst.setInt(2, pojo.getId());
+			pst.setString(2, pojo.getFoto());
+			pst.setFloat(3, pojo.getPrecio());
+			pst.setInt(4, pojo.getId());
+			
 
 			int beenUpdated = pst.executeUpdate();
 

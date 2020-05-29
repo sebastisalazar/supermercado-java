@@ -21,29 +21,43 @@ public class EliminarUsuariosController2 extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mensaje="";
-		ArrayList<Usuario> usuarios= new ArrayList<>();
+		
+		//Recogemos los parametros de los campos del formulario
+		String ids= request.getParameter("id");
+		int id= Integer.parseInt(ids);
+		
+		//iniciliacion de crud
+		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
+		
+		//inciliacion para guardas los mensajes de la respuesta
+		Alerta alerta= new Alerta();
+		
+		//delete y creacion de alerta con mensajes
 		try {
-			String ids= request.getParameter("id");
-			int id= Integer.parseInt(ids);
-			UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
+		
 			dao.delete(id);
-			
-			
-			usuarios=dao.getAll();
-			
-			
-			mensaje="Usuario borrado correctamente";
-			
-			
-			
+			alerta = new Alerta( "success", "Usuario eliminado con exito");
+
 		} catch (Exception e) {
-			mensaje="Error, no se ha podido eliminar el usuario. "+e.getMessage();
+			alerta = new Alerta( "danger", "Error, no se ha podido borrar el usuario. "+e.getMessage());
 			e.printStackTrace();
+		}finally {
+			//iniciliacion para guardar la respuesta
+			ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
+			try {
+				usuarios = dao.getAll();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			//se pasan los mensajes de la respuesta y el estado de la lista actual despues del update a la vista
+			request.setAttribute("usuarios", usuarios);
+			request.setAttribute("alerta", alerta);
+			
+			//se redirecciona
+			request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
 		}
-		request.setAttribute("usuarios", usuarios);
-		request.setAttribute("mensaje", mensaje);
-		request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
+		
 	}
 
 	/**

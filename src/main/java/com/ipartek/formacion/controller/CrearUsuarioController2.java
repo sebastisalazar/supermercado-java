@@ -18,44 +18,79 @@ import com.ipartek.formacion.modelo.UsuarioDAOImpl;
 @WebServlet("/crear-usu")
 public class CrearUsuarioController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CrearUsuarioController2() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		//iniciliacion para operar contra bbdd
 		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
-		String mensaje="";
-		try {
-			String nombre= request.getParameter("nombre");
-			Usuario u= new Usuario();
-			u.setNombre(nombre);
-			u=dao.insert(u);
-			mensaje="Usuario creado satisfactoriamente";
-		} catch (Exception e) {
-			mensaje="Error, no se ha podido crear. "+e.getMessage();
-			e.printStackTrace();
+		
+		//Inicializacion para guardar mensajes de alerta
+		Alerta alerta= new Alerta();
+		
+		//Guarda el value de los campos del formulario
+		String nombre;
+		String contrasenia;
+		int id_rol;
+		
+		//objeto usuario vacio para rellenar con los datos
+		Usuario u= new Usuario();
+		
+		//comprobacion de campos vacios
+		
+		//campo nombre
+		
+		if (("").equalsIgnoreCase(request.getParameter("nombre"))) {
+			nombre="-";
+		}else {
+			nombre=request.getParameter("nombre");
 		}
 		
-		request.setAttribute("mensaje", mensaje);
-		request.getRequestDispatcher("formulario-usuario2.jsp").forward(request, response);
+		//campo contraseña
+		 if (("").equalsIgnoreCase(request.getParameter("contrasenia"))==true) {
+			contrasenia="12345";
+		 }else{
+			contrasenia=request.getParameter("contrasenia");
+		 }//fin if
+		 
+		 //campo id_rol
+		 if (("").equalsIgnoreCase(request.getParameter("id_rol"))==true) {
+			id_rol=1;
+		 }else{
+			id_rol=Integer.parseInt(request.getParameter("id_rol"));
+		 }//fin if
+		
+		//asercion de atributos al objeto vacio
+		 u.setNombre(nombre);
+		//asercion de datos despues de comprobaciones
+		 u.setNombre(nombre);
+		 u.setContrasenia(contrasenia);
+		 u.setId_rol(id_rol);
+		
+		//ejecucion de insert y creacion de alertas
+		try {
+			
+			u=dao.insert(u);
+			alerta = new Alerta( "success", "Usuario creado con exito");
+			
+		} catch (Exception e) {
+			
+			alerta = new Alerta( "danger", "Error, El Usuario no se ha podido crear. "+e.getMessage());
+			e.printStackTrace();
+			
+		}finally{
+			//se envian los mensajes de alerta a la vista
+			request.setAttribute("alerta", alerta);
+			//se redirecciona
+			request.getRequestDispatcher("formulario-usuario2.jsp").forward(request, response);
+		}
+		
+		
 		
 	}
 

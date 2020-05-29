@@ -28,6 +28,28 @@ public class EditarProductoController2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//obtiene el ID del formulario
+		int id= Integer.parseInt(request.getParameter("id"));
+		
+		//iniciliacion para llamar al getbyid
+		ProductoDAOImp dao= ProductoDAOImp.getInstance();
+		
+		try {
+			//obtenemos el producto mediante el id y lo guardamos
+			Producto producto= dao.getById(id);
+			
+			//se pasa el objeto producto obtenido con todos sus atributos a la vista
+			request.setAttribute("producto", producto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+			//finalmente se redirecciona
+			request.getRequestDispatcher("editarProducto2.jsp").forward(request, response);
+		}
+		
+		
 		
 	}
 		
@@ -36,29 +58,72 @@ public class EditarProductoController2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idString= request.getParameter("id");
-		String nombre= request.getParameter("nombrenuevo");
-		int id= Integer.parseInt(idString);
 		
-		Producto p= new Producto();
-		p.setId(id);
-		p.setNombre(nombre);
+		//iniciliacion para guardas mensajes de alerta
+		Alerta alerta = new Alerta();
 		
-		String mensaje="";
-		
+		//iniciliacion para operar contra bbdd
 		ProductoDAOImp dao= ProductoDAOImp.getInstance();
-		try {
-			dao.update(p);
-			mensaje="Producto editado satisfactoriamente.";
-		} catch (Exception e) {
-			mensaje="Error, el producto no se ha podido editar. "+e.getMessage();
-			e.printStackTrace();
+		
+		//Recoge los datos en los campos
+		String nombre;
+		String foto;
+		float precio;
+		
+		//producto vacio a rellenar con los datos recogidos
+		Producto p= new Producto();
+	
+		//Comprobaciones de campos vacios
+		
+		//campo nombre
+		if (("").equalsIgnoreCase(request.getParameter("nombre"))==true) {
+			nombre="-";
+		}else{
+			nombre=request.getParameter("nombre");
 		}
 		
-		ArrayList<Producto> productos= dao.getAll();
-		request.setAttribute("productos", productos);
-		request.setAttribute("mensaje", mensaje);
-		request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
+		//campo foto
+		if (("").equalsIgnoreCase(request.getParameter("foto"))==true) {
+			foto="https://picsum.photos/75/75";
+		}else{
+			foto=request.getParameter("foto");
+		}
+		
+		//campo precio
+		if (("").equalsIgnoreCase(request.getParameter("precio"))==true) {
+			precio=0f;
+		}else{
+			precio=Float.parseFloat(request.getParameter("precio"));
+		}
+		
+		
+		//Asercion de datos al producto
+		p.setId(Integer.parseInt(request.getParameter("id")));
+		p.setNombre(nombre);
+		p.setPrecio(precio);
+		p.setFoto(foto);
+		
+		//ejecucuon del update
+		try {
+			dao.update(p);
+			alerta = new Alerta( "success", "Producto actualizado con exito");
+		} catch (Exception e) {
+			alerta = new Alerta( "danger", "Error, el producto no se ha podido editar. " + e.getMessage());
+			e.printStackTrace();
+		}finally {
+			
+			//Se obtiene el estado de la lista despues del update
+			ArrayList<Producto> productos= dao.getAll();
+			
+			//se pasa el estado de la lista despues del update y los mensajes de alerta obtenidos
+			request.setAttribute("productos", productos);
+			request.setAttribute("alerta", alerta);
+			
+			//Finalmente se redirecciona
+			request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 }

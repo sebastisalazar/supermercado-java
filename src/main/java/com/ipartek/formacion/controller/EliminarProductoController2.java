@@ -20,30 +20,37 @@ public class EliminarProductoController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Recogemos los parametros de los campos del formulario
 		String ids=request.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
+		//iniciliacion de crud
 		ProductoDAOImp dao= ProductoDAOImp.getInstance();
-		Producto p= new Producto();
 		
-		String mensaje="";
+		//inciliacion para guardas los mensajes de la respuesta
+		Alerta alerta= new Alerta();
+		
+		//delete y creacion de alerta con mensajes
 		try {
-			p=dao.delete(id);
-			mensaje= "Producto borrado con exito";
+			dao.delete(id);
+			alerta = new Alerta( "success", "Producto eliminado con exito");
 		} catch (Exception e) {
-			mensaje="Error, no se ha podido borrar el producto. "+e.getMessage();
+			alerta = new Alerta( "danger", "Error, no se ha podido borrar el producto. "+e.getMessage());
 			e.printStackTrace();
+		}finally {
+			
+			//inicialiacion para guardar el estado de la lista despues del delete
+			ArrayList<Producto> productos=dao.getAll();
+			
+			//se pasan los mensajes de la respuesta y el estado de la lista actual despues del update a la vista
+			request.setAttribute("alerta", alerta);
+			request.setAttribute("productos", productos);
+			
+			//Se redirecciona
+			request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
 		}
-		ArrayList<Producto> productos=dao.getAll();
-		request.setAttribute("mensaje", mensaje);
-		request.setAttribute("productos", productos);
 		
-		
-		request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
 		
 	}
 

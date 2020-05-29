@@ -1,8 +1,20 @@
 .tabla{
 	text-align:center;
+	height: 100%;
+	
+}
+
+.tabla th{
+	height: 12%;
+	padding:10px 0px;
+	
 }
 
 .table td{
 	vertical-align: unset;
 }
 
+.tabla td{
+	vertical-align: middle;
+	border: 1px solid black;
+}

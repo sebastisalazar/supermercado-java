@@ -24,22 +24,56 @@ public class CrearProductoController2 extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//para conseguir los datos de la base de datos
+		//Conseguir los datos de la base de datos
+		  Alerta alerta= new Alerta();
 		  ProductoDAOImp dao= ProductoDAOImp.getInstance();
 		  Producto p= new Producto();
-		  String nombre=request.getParameter("nombre");
+		  String nombre;
+		  Float precio;
+		  String foto;
+		  
+		  
+		  	//comprobaciones de campos en blanco
+		 
+		  	//campo nombre
+			 if (("").equalsIgnoreCase(request.getParameter("nombre"))==true) {
+				nombre="-";
+			 }else{
+				nombre=request.getParameter("nombre");
+			 }
+			 
+			//campo foto
+			 if (("").equalsIgnoreCase(request.getParameter("foto"))==true) {
+				foto="https://picsum.photos/75/75";
+			 }else{
+				foto=request.getParameter("foto");
+			 }
+			 
+			//campo precio
+			 if (("").equalsIgnoreCase(request.getParameter("precio"))==true) {
+				precio=0f;
+			 }else{
+				precio= Float.parseFloat(request.getParameter("precio"));	
+			 }
+		  
+		
+		  // asercion de los datos en campo al objeto
+			 
 		  p.setNombre(nombre);
-		  String mensaje="";
+		  p.setFoto(foto);
+		  p.setPrecio(precio);
 		  
-		  try {
+		 
+		//insert
+		try {
 			dao.insert(p);
-			mensaje="Producto registrado correctamente";
+			alerta = new Alerta( "success", "Producto creado con exito");
 		} catch (Exception e) {
-			mensaje="Error, se ha producito un error. "+e.getMessage();
-			e.printStackTrace();
+			alerta = new Alerta( "danger", "Error, no se ha podido crear. "+e.getMessage());
 		}
-		  
-		  request.setAttribute("mensaje", mensaje);
+		  //Respuesta
+		  request.setAttribute("alerta", alerta);
+		  //redireccionamiento
 		  request.getRequestDispatcher("formulario-producto2.jsp").forward(request, response);
 		  
 		 
