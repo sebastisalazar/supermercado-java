@@ -7,7 +7,13 @@
  
 </jsp:include>
 
+<div class="container pb-4">
+	<div class="container pt-5">
+		<jsp:include page="includes/alerta.jsp"></jsp:include>
+	</div>
+
 	<div id="contenedor">
+		
 		<div id="caja">
 			
 			<h1 class="text-primary text-center pt-20 d-block" style="flex: 0 1 100%;">Panel de control</h1><br>
@@ -24,6 +30,6 @@
 	 	</div>
 
 	</div>
-	
+</div>	
 
-<%@include file="includes/pie.jsp" %>
+<jsp:include page="includes/pie.jsp"/>

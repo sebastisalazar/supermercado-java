@@ -64,10 +64,13 @@
                 <a class="nav-link" href="login.jsp" tabindex="-1" aria-disabled="true">Administrador</a>
               </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light bg-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <span class="form-inline">
+            
+				        <a href="${empty isLogeado ? "login.jsp" : "#"}" class="btn btn-outline-light bg-success my-2 my-sm-0 text-white">${empty isLogeado ? "Iniciar Sesion" : usuario}</a>
+				  	
+            </span>
+              
+            
           </div>
         </nav>
     </header>

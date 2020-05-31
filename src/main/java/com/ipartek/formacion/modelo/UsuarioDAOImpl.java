@@ -27,7 +27,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private final String SQL_GETALL = "SELECT id,nombre, contrasenia, id_rol FROM usuario";
 	private final String SQL_GETBYID = "SELECT id, nombre, contrasenia, id_rol FROM supermercado.usuario WHERE id=?";
 	private final String SQL_DELETEBYID = "DELETE FROM usuario WHERE id=?";
-	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia,id_rol) VALUES(?,'12345',1)";
+	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia, id_rol) VALUES(?,?,1)";
 	private final String SQL_UPDATE= "UPDATE usuario SET nombre=?, contrasenia=?, id_rol=? WHERE id=?";
 	private final String SQL_GETBYNAME= "SELECT id,nombre FROM usuario WHERE nombre LIKE ?";
 
@@ -155,6 +155,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		){
 			pst.setString(1, pojo.getNombre());
+			pst.setString(2, pojo.getContrasenia());
 			try{
 				int filaInsertada= pst.executeUpdate();
 				if (filaInsertada==1) {
