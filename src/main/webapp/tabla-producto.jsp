@@ -46,7 +46,7 @@
 					</td>
 					<td>
 						<a href="eliminar-prod?id=${p.id}">
-							<i class="fas fa-trash"></i>
+							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>
 					<td>

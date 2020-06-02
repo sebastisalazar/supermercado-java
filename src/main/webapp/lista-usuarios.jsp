@@ -43,7 +43,7 @@
 					</td>
 					<td>
 						<a href="eliminar-usu?id=${u.id}">
-							<i class="fas fa-trash"></i>
+							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>
 					<td>
