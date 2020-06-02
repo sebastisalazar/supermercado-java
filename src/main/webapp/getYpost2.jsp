@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <jsp:include page="includes/cabecera.jsp" >
  
-<jsp:param name="pagina" value="Administrador" />
+<jsp:param name="pagina" value="Ejemplos" />
  
-<jsp:param name="title" value="Administrador" /> 
+<jsp:param name="title" value="Get y Post" /> 
  
 </jsp:include>
 

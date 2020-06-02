@@ -1,0 +1,43 @@
+.itemMenu{
+  	background-color: transparent;
+  	border: transparent;
+}
+
+.itemMenu:hover{
+  	background-color: darkred;
+  	border: transparent;
+}
+
+.nav-item:hover{
+ 	background-color: darkred;
+  	border: transparent;
+  	border-radius:3px;
+ }
+
+.dropdown-menu{
+  	background-color: #f70b26;
+  	color:white;
+}
+
+.dropdown-item:hover{
+  	background-color: darkred;
+  	border: transparent;
+}
+
+.show > .btn-primary.dropdown-toggle{
+	background-color: transparent;
+  	border: transparent;
+  	color:white
+}
+
+.btn-primary:not(:disabled):not(.disabled).active{
+	background-color: transparent;
+  	border: transparent;
+  	
+}
+
+.active{
+  border-bottom: 1px solid white;
+  font-weight: 600;
+}
+

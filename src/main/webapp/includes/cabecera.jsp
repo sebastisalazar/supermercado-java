@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,6 +34,9 @@
     <!-- Estilio para tablas -->
     <link rel="stylesheet" href="css/tabla.css">
     
+    <!-- Estilio para el menu -->
+    <link rel="stylesheet" href="css/cabecera.css">
+    
     <title>${param.title} | Supermercado</title>
   </head>
   <body>
@@ -48,27 +52,77 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item ${ ( 'Inicio' eq param.pagina ) ? 'active' : '' } ">
-                <a class="nav-link" href="index.jsp">Inicio</a>
+              <li class="nav-item text-center ${ ( 'Inicio' eq param.pagina ) ? 'active' : '' } ">
+                <a class="nav-link text-white px-2 " href="index.jsp">Inicio</a>
               </li>
             
-              <li class="nav-item ${ ( 'Productos' eq param.pagina ) ? 'active' : '' } }">
-                <a class="nav-link" href="lista-productos" tabindex="-1" aria-disabled="true">Productos</a>
-              </li>
-              
-              <li class="nav-item ${ ( 'Usuarios' eq param.pagina ) ? 'active' : '' } }">
-                <a class="nav-link" href="lista-usuarios" tabindex="-1" aria-disabled="true">Usuarios</a>
-              </li>
-              
-              <li class="nav-item ${ ( 'Administrador' eq param.pagina ) ? 'active' : '' } }">
-                <a class="nav-link" href="login.jsp" tabindex="-1" aria-disabled="true">Administrador</a>
-              </li>
+            	
+            <!-- Oculta el menu si no hay usuarios logeados -->
+	            <c:if test="${ not empty isLogeado }">
+	            
+	            	 <li class="nav-item text-center ${ ( 'PanelControl' eq param.pagina ) ? 'active' : '' } ">
+		                <a class="nav-link text-white px-2 " href="panel-administrador.jsp">Panel Administrador</a>
+		             </li>
+		         </c:if>    
+		             
+		             
+		        <div class="dropdown mr-1 ${ ( 'Ejemplos' eq param.pagina ) ? 'active' : '' }">
+					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Ejemplos' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+					      Ejemplos
+					    </button>
+					    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+					      <a class="dropdown-item text-white " href="getYpost2.jsp">Get y Post</a>
+					      <a class="dropdown-item text-white" href="formulario2.jsp">Formulario CV</a>
+					    </div>
+				</div>
+		             
+		        <c:if test="${ not empty isLogeado }">    
+	            	 <div class="dropdown mr-1 ${ ( 'Productos' eq param.pagina ) ? 'active' : '' }">
+					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Productos' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+					      Productos
+					    </button>
+					    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+					      <a class="dropdown-item text-white " href="lista-productos">Listar productos</a>
+					      <a class="dropdown-item text-white " href="formulario-producto2.jsp">Registrar productos</a>
+					    </div>
+					 </div>
+				 
+					 <div class="dropdown mr-1 ${ ( 'Usuarios' eq param.pagina ) ? 'active' : '' }">
+					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Usuarios' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+					      Usuarios
+					    </button>
+					    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+					      <a class="dropdown-item text-white " href="lista-usuarios">Listar usuarios</a>
+					      <a class="dropdown-item text-white" href="formulario-usuario2.jsp">Registrar usuarios</a>
+					    </div>
+					 </div>
+	            </c:if>
+	            
+	            
+	            	 
+	           
+
             </ul>
-            <span class="form-inline">
             
-				        <a href="${empty isLogeado ? "login.jsp" : "#"}" class="btn btn-outline-light bg-success my-2 my-sm-0 text-white">${empty isLogeado ? "Iniciar Sesion" : usuario}</a>
-				  	
-            </span>
+            
+            <!-- enseña el boton de logout o iniciar sesion si el usuario no esta logeado -->
+         	<c:if test="${ empty isLogeado }">
+         		<span class="form-inline">
+            	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="login.jsp">Iniciar Sesión</a>
+            	</span>
+            </c:if>	  
+            
+            <c:if test="${ not empty isLogeado }">
+            	<span class="badge badge-pill badge-light "></span>
+            		<a class="nav-link  btn btn-outline-success bg-success text-white" href="#">${usuario}</a>
+            	</span>
+            	
+            	<span class="badge badge-pill badge-light"></span>
+            		<a class="nav-link  btn btn-outline-success bg-success text-white ml-3" href="logout">Cerrar Sesión</a>
+            	</span>
+            </c:if>
+              
+         	
               
             
           </div>

@@ -4,7 +4,7 @@
  
 <jsp:param name="pagina" value="Productos" />
  
-<jsp:param name="title" value="Productos" /> 
+<jsp:param name="title" value="Lista productos" /> 
  
 </jsp:include>
 

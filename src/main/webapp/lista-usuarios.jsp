@@ -4,7 +4,7 @@
  
 <jsp:param name="pagina" value="Usuarios" />
  
-<jsp:param name="title" value="Usuarios" /> 
+<jsp:param name="title" value="Lista usuarios" /> 
  
 </jsp:include>
 

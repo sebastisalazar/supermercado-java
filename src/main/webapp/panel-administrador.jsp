@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="includes/cabecera.jsp" >
  
-<jsp:param name="pagina" value="Administrador" />
+<jsp:param name="pagina" value="PanelControl" />
  
-<jsp:param name="title" value="Administrador" /> 
+<jsp:param name="title" value="Panel de Control" /> 
  
 </jsp:include>
 
