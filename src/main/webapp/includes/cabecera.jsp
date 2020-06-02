@@ -1,3 +1,5 @@
+<%@page import="com.ipartek.formacion.controller.Alerta"%>
+<%@page import="com.mysql.fabric.Response"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!doctype html>
 <html lang="en">
@@ -45,6 +47,7 @@
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top pl-5 pr-5">
 
+		 
 		  <!-- Logo -->
           <a class="navbar-brand" href="index.jsp"><img src="img/logoEmpresa.gif" alt="logo"></a>
 
@@ -132,4 +135,7 @@
    
     <main role="main" class="container">
     	
+		    	
+		
+		
     	

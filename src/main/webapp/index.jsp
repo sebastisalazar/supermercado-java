@@ -7,7 +7,6 @@
  
 </jsp:include>
  
- 
  <div class="container ">
         <div class="row row-cols-5">
           <div class="col mt-5">

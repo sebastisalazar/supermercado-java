@@ -29,20 +29,27 @@ public class LogOutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Variables a usar para pasar a la vista
 		String mensaje;
 		String idioma="ES";
 		
+		//obtiene todas las cookies creadas en un array
 		Cookie[] cookies = request.getCookies();
-		for ( Cookie c : cookies ) {			
+		
+		//se lee el array de cookies
+		for ( Cookie c : cookies ) {
+			
+			//Se mira que idioma seleccionó el usuario y se guardo en la cookie
 			if ( "cIdioma".equals(c.getName()) ) {   // cookie encontrada
-				idioma = c.getValue();
-				break;
+				idioma = c.getValue();//se guarda el idioma
+				break;//sale del for
 			}			
 		}
 		
+		//Se evalua el idioma el idioma
 		switch (idioma) {
 		case "EN":
-			mensaje = "You have successfully signed out, See yo soon!";
+			mensaje = "You have successfully signed out, See you soon!";
 			break;
 			
 		case "ES":
@@ -54,15 +61,20 @@ public class LogOutController extends HttpServlet {
 			break;
 		}
 	
-		
-		
-
+	
+		//se obtiene la session que se haya creado
 		HttpSession session = request.getSession();
+		
+		//se mata /invalida la sesion
 		session.invalidate();
+		
+		//Se inicializa a null para que no guarde nada
 		session = null;
 		
-		
+		//se pasa el mensaje de DESLOGEO mediante una alerta
 		request.setAttribute("alerta", new Alerta("success", mensaje));
+		
+		//Se redirecciona a login
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
