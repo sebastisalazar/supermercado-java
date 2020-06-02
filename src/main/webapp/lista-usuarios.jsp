@@ -11,14 +11,18 @@
 
 <div class="container pt-5">
      
+     	<!-- Importa el jsp alerta que contiene los mensajes para las interacciones -->
      	<jsp:include page="includes/alerta.jsp"></jsp:include>
+     	
         <h1 class="text-primary text-center mb-5">Lista de Usuarios</h1>
+        
+        <!-- Opciones extras -->
         <p class="text-center mb-5">
           <a href="formulario-usuario2.jsp" class="btn bg-primary text-white">Registrar nuevo usuario</a>
           <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
         </p>
 		
-		
+		<!-- Tabla con datos -->
         <table class="tabla table table-striped">
             <thead>
               <tr>
@@ -31,7 +35,11 @@
               </tr>
             </thead>
             <tbody>
+            
+            	<!-- Recoge el array usuarios y lo recorre -->
               <c:forEach items="${usuarios}" var="u">
+              
+              	<!-- Por cada uno pinta una fila con 6 columnas -->
 				<tr>
 					<td>${u.id}</td> <% // no hace falta usar el getter p.id == p.getId() %>
 					<td>${u.nombre}</td>

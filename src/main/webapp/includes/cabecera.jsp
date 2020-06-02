@@ -45,11 +45,15 @@
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top pl-5 pr-5">
 
+		  <!-- Logo -->
           <a class="navbar-brand" href="index.jsp"><img src="img/logoEmpresa.gif" alt="logo"></a>
 
+		  <!-- Boton para vistas moviles -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          
+          <!-- Contenedor de opciones de la cabecera -->
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item text-center ${ ( 'Inicio' eq param.pagina ) ? 'active' : '' } ">
@@ -65,7 +69,7 @@
 		             </li>
 		         </c:if>    
 		             
-		             
+		    <!-- Esta opcion la muestra exista o no un usuario logeado -->   
 		        <div class="dropdown mr-1 ${ ( 'Ejemplos' eq param.pagina ) ? 'active' : '' }">
 					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Ejemplos' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
 					      Ejemplos
@@ -75,7 +79,8 @@
 					      <a class="dropdown-item text-white" href="formulario2.jsp">Formulario CV</a>
 					    </div>
 				</div>
-		             
+		         
+		     <!-- Oculta el menu si no hay usuarios logeados -->    
 		        <c:if test="${ not empty isLogeado }">    
 	            	 <div class="dropdown mr-1 ${ ( 'Productos' eq param.pagina ) ? 'active' : '' }">
 					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Productos' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
@@ -97,11 +102,7 @@
 					    </div>
 					 </div>
 	            </c:if>
-	            
-	            
-	            	 
 	           
-
             </ul>
             
             
@@ -112,17 +113,16 @@
             	</span>
             </c:if>	  
             
+            <!-- Si el usuario se logea enseña su usuario + un boton para cerrar sesion -->
             <c:if test="${ not empty isLogeado }">
             	<span class="badge badge-pill badge-light "></span>
-            		<a class="nav-link  btn btn-outline-success bg-success text-white" href="#">${usuario}</a>
+            		<a class="nav-link  btn btn-outline-success bg-success text-white" href="panel-administrador.jsp">${usuario}</a>
             	</span>
             	
             	<span class="badge badge-pill badge-light"></span>
             		<a class="nav-link  btn btn-outline-success bg-success text-white ml-3" href="logout">Cerrar Sesión</a>
             	</span>
             </c:if>
-              
-         	
               
             
           </div>
