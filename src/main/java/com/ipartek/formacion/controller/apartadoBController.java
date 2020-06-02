@@ -1,4 +1,4 @@
-package testAnder.Controllers;
+package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class apartadoAController
  */
-@WebServlet("/apartado-a")
+@WebServlet("/apartado-b")
 public class apartadoBController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,17 +33,23 @@ public class apartadoBController extends HttpServlet {
 		
 		//obtiene la fecha
 		LocalDateTime tiempo = LocalDateTime.now();
-		String horaInicio = tiempo.format(DateTimeFormatter.ofPattern("HH:mm"));		
+		String horaInicio = tiempo.format(DateTimeFormatter.ofPattern("HH:mm"));
+		
+		//navegador
+		String navegador=request.getHeader("User-Agent");
 	
+		
 		//Creacion de la sesion
 		HttpSession session = request.getSession();
+		
+		//Asersicon de atributos para recoger en la vista
 		session.setAttribute("nombre", nombre);
+		session.setAttribute("color", colorFavorito);
 		session.setAttribute("horaInicio", horaInicio) ;
+		session.setAttribute("navegador",navegador);
 		
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("colorFavorito", colorFavorito);
-		
-		request.getRequestDispatcher("resultadoA.jsp").forward(request, response);
+		//se redirecciona a la vista
+		request.getRequestDispatcher("resultadoB.jsp").forward(request, response);
 	}
 
 }

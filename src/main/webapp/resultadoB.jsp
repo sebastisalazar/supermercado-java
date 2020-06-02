@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,24 +10,29 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Apartado A</title>
+    <title>Apartado B</title>
   </head>
   <body>
     
     <main role="main">
 			<div class="container mt-5 pt-5 px-5">
 		
-				<h1>Resultado apartado A</h1>
-				
+				<h1>Resultado apartado B</h1>
+				<p>
+					<span class="font-weight-bold">Hora de inicio:</span>  
+					${horaInicio}
+					</p>
 				<p>
 					<span class="font-weight-bold">Nombre / Usuario: </span>
-					${cookie['nombre'].value}
-				
+					${nombre}
 				</p>
-				
 				<p>
 					<span class="font-weight-bold">Color Favorito: </span>
-					${cookie['color'].value}
+					${color}
+				</p>
+				<p>
+					<span class="font-weight-bold">Navegador: </span>
+					${navegador}
 				</p>
 				
 			</div>

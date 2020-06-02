@@ -1,4 +1,4 @@
-package testAnder.Controllers;
+package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -30,26 +30,18 @@ public class apartadoAController extends HttpServlet {
 		
 		//creacion de cookies
 		Cookie cNombre= new Cookie("nombre", nombre);
-		Cookie cColorFavorito= new Cookie("nombre", colorFavorito);
+		Cookie cColorFavorito= new Cookie("color", colorFavorito);
 		
 		//limite de las cookies
 		cNombre.setMaxAge( 60 * 1 * 60 * 24 * 365  );  // 1 año
 		cColorFavorito.setMaxAge( 60 * 1 * 60 * 24 * 365  );  // 1 año
 		
-		//se añaden
+		//se añaden las cookies para poder recogerlas en la vista
 		response.addCookie(cNombre);
 		response.addCookie(cColorFavorito);
 		
-		// recoger todas las cookies en el servidor
-		Cookie[] arrayCookies = request.getCookies();
 		
-		//se pasa los atributos a la vista
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("colorFavorito", colorFavorito);
-		
-		
-		
-		//se redirecciona
+		//se redirecciona a la vista
 		request.getRequestDispatcher("resultadoA.jsp").forward(request, response);
 	}
 
