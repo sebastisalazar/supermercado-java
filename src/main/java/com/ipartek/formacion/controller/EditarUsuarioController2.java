@@ -79,10 +79,13 @@ public class EditarUsuarioController2 extends HttpServlet {
 		 }//fin if
 		 
 		//campo contraseña
-		 if (("").equalsIgnoreCase(request.getParameter("contrasenia"))==true) {
-			contrasenia="12345";
+		 if (("").equalsIgnoreCase(request.getParameter("contrasenianueva"))==true) {
+			 
+			 //si el campo contrasenia nueva esta vacio se mantiene la antigua
+			contrasenia=request.getParameter("contraseniaantigua");
 		 }else{
-			contrasenia=request.getParameter("contrasenia");
+			 //si el campo contrasenia se ha rellenado se recoge el dato
+			contrasenia=request.getParameter("contrasenianueva");
 		 }//fin if
 		 
 		 //campo id_rol

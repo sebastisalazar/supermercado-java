@@ -16,7 +16,7 @@
                 <div class=" mt-5">
                     <jsp:include page="includes/alerta.jsp"></jsp:include>
                     <!--Formulario login-->
-                    <form class="mt-5" action="login" method="POST">
+                    <form class="mt-5" action="login" method="POST" onsubmit="cifrar()">
                         <h1 class="text-primary text-center pt-20">Portal del Administrador</h1>
                         
                         
@@ -28,13 +28,13 @@
                         
                         
                         <div class="form-group mt-5">
-	                        <label for="exampleInputEmail1">Email</label>
-	                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${ cookie['cEmail'].value }" required>
+	                        <label for="email">Email</label>
+	                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" value="${ cookie['cEmail'].value }" required>
                         </div>
                         
                         <div class="form-group">
-	                        <label for="exampleInputPassword2">Password</label>
-	                        <input type="password" name="password" class="form-control" id="exampleInputPassword2" value="${ cookie['cPassword'].value }" required>
+	                        <label for="password">Password</label>
+	                        <input type="password" name="password" class="form-control" id="password" value="${ cookie['cPassword'].value }" required>
                         </div>
                         
                         <div class="form-group">

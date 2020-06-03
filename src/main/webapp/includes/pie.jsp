@@ -38,14 +38,13 @@
    <!-- datatables -->
    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
-   <!-- custom js -->
-   <script>
-       // ejecuta la funcion cuando todo el documento de html DOM este listo y cargado
-       $(document).ready(function() {
-           // seleccion por id => #example y ejecuta el plugin .DataTable();
-           $('.tabla').DataTable();
-       });
-   </script> 
+  <!-- cifrado en MD5 -->
+ 	<script src="js/md5.min.js"></script>
+
+    <!-- nuestro javascript -->
+    <script src="js/custom.js"></script>
+   
+   
   
   </body>
 </html>

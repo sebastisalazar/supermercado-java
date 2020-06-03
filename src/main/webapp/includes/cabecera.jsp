@@ -41,7 +41,7 @@
     
     <title>${param.title} | Supermercado</title>
   </head>
-  <body>
+  <body onload="init()">
     <header class="mb-5">
         <!---Barra de navegacion-->
 
