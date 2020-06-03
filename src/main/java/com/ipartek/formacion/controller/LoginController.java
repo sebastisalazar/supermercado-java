@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.modelo.Usuario;
+import com.ipartek.formacion.modelo.UsuarioDAOImpl;
+
 /**
  * Servlet implementation class LoginController
  */
@@ -48,18 +51,28 @@ public class LoginController extends HttpServlet {
 		//obtiene la sesion creada por el navegador
 		HttpSession session = request.getSession();
 		
-		if (("sebastian@supermercado.es").equalsIgnoreCase(email) && ("admin").equalsIgnoreCase(password)) {
+		//Validacion de usuario (si existe en la base de datos)
+		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
+		Usuario usuario=null;
+		
+		try {
+			usuario=dao.getExiste(email, password);
+			
+		} catch (Exception e) {
+			alerta= new Alerta("danger",e.getMessage());
+		}
+		
+		
+		if (usuario!=null) {
 			
 		//COOKIE
 			
 			// gestionar cookie del email	 y password
-			
 			Cookie cEmail = new Cookie("cEmail", email );
 			Cookie cPassword= new Cookie("cPassword", password );
 			Cookie cIdioma= new Cookie("cIdioma", idioma );
 			
 			// Guardar una cookie con la ultima visita
-			
 			LocalDateTime tiempo = LocalDateTime.now();
 			String formattedDate = tiempo.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy_HH:mm"));
 			
@@ -91,41 +104,35 @@ public class LoginController extends HttpServlet {
 			Cookie[] arrayCookies = request.getCookies();
 			// para buscar una habrai que hacer un for y buscar por su identificador
 			
+			//Guardamos el nombre para mostrar quien esta logeado en la vista
 			
+			session.setAttribute("usuario_logeado", email);
 			
-		//SESSION
-			
-			//se fija una expiracion para la sesion
-			session.setMaxInactiveInterval( 60 * 5 ); // 5 minutos sin peticiones, se invalida la session del usuario
-			
-			//asercion de atributos para la session cogiendo los campos del formulario
-			session.setAttribute("isLogeado", true );
-			session.setAttribute("usuario", email );
-			
-			//Eleccion de mensaje segun el idioma escogido en el formulario
+			//Se evalua el idioma el idioma
 			switch (idioma) {
 			case "EN":
-				mensaje = "You have successfully signed in, glad to have you back here!";
+				mensaje = "You have successfully signed in, Glad to have you back here!";
 				break;
 				
 			case "ES":
-				mensaje = "¡Hola de Nuevo! te has logeado correctamente. ";
+				mensaje = "Has iniciado sesion correctamente, ¡Encantados de tenerte de vuelta por aqui! ";
 				break;	
 
 			default:
-				mensaje = "Kaixo berriro, ongi hasi zara saioa egiten.";
+				mensaje = "Sartu zara arrakastaz, atsegin baduzu berriro hemen!";
 				break;
 			}
 			
-			//mensajes a pasar para la vista
+			
+			//se crea la alerta para informar del error con un mensaje
 			alerta= new Alerta("success", mensaje);
 			
-			//se pasa el atributo alerta a la vista para que la pueda leer
+			
+			//Se pasa la alerta con mensajes a la vista
 			request.setAttribute("alerta", alerta);
-			
-			//se redirecciona
+		
+			//se redirecciona otra vez al login
 			request.getRequestDispatcher("panel-administrador.jsp").forward(request, response);
-			
 			
 		}else {//si no esta logeado
 			

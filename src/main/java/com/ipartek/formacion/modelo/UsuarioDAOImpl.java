@@ -30,6 +30,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia, id_rol) VALUES(?,?,1)";
 	private final String SQL_UPDATE= "UPDATE usuario SET nombre=?, contrasenia=?, id_rol=? WHERE id=?";
 	private final String SQL_GETBYNAME= "SELECT id,nombre FROM usuario WHERE nombre LIKE ?";
+	private final String SQL_EXISTE = "SELECT id, nombre, contrasenia, id_rol FROM supermercado.usuario WHERE nombre=? AND contrasenia=?";
 
 	/**
 	 * @return Array List de todos los usuarios en la base de datos
@@ -251,4 +252,50 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return registroNombres;
 	}
 
+	
+	
+	/**
+	 * @param Recibe el nombre del usuario y el password a buscar
+	 * @return Objeto de tipo usuario cuyo nombre y contraseña es igual al que recibe por parametro
+	 * @throws Mensaje en caso de no existir ningun registro con el nombre y password recibido por parametro 
+	 */
+	@Override
+	public Usuario getExiste(String nombre, String password) throws Exception {
+
+		//Iniciliazacion de usuario vacio
+		Usuario usuario = null;
+
+		try (
+				Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_EXISTE);
+
+		) {
+			//se especifica el usuario con nombre y el password que queremos
+			pst.setString(1,nombre);
+			pst.setString(2,password);
+			
+			//Ejecucion del select
+			try (ResultSet rs = pst.executeQuery()) {
+
+				while (rs.next()) {
+					usuario= new Usuario();
+					usuario.setId(rs.getInt("id"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setContrasenia(rs.getString("contrasenia"));
+					usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
+
+				}
+
+				// si no encuentra registros lanza el siguiente mensaje
+				if (rs.last() == false) {
+					throw new Exception("\nLo sentimos no existe usuario con el nombre " + nombre+ " y contrasenia "+password+"\n");
+				}
+			}
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
+		return usuario;
+	}
 }

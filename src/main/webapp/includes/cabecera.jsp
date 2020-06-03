@@ -65,7 +65,7 @@
             
             	
             <!-- Oculta el menu si no hay usuarios logeados -->
-	            <c:if test="${ not empty isLogeado }">
+	            <c:if test="${ not empty usuario_logeado }">
 	            
 	            	 <li class="nav-item text-center ${ ( 'PanelControl' eq param.pagina ) ? 'active' : '' } ">
 		                <a class="nav-link text-white px-2 " href="panel-administrador.jsp">Panel Administrador</a>
@@ -84,7 +84,7 @@
 				</div>
 		         
 		     <!-- Oculta el menu si no hay usuarios logeados -->    
-		        <c:if test="${ not empty isLogeado }">    
+		        <c:if test="${ not empty usuario_logeado }">    
 	            	 <div class="dropdown mr-1 ${ ( 'Productos' eq param.pagina ) ? 'active' : '' }">
 					    <button type="button" class="btn btn-primary dropdown-toggle itemMenu itemMenu-tooggle ${ ( 'Productos' eq param.pagina ) ? 'active' : '' } " id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
 					      Productos
@@ -110,16 +110,16 @@
             
             
             <!-- enseña el boton de logout o iniciar sesion si el usuario no esta logeado -->
-         	<c:if test="${ empty isLogeado }">
+         	<c:if test="${ empty usuario_logeado }">
          		<span class="form-inline">
             	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="login.jsp">Iniciar Sesión</a>
             	</span>
             </c:if>	  
             
             <!-- Si el usuario se logea enseña su usuario + un boton para cerrar sesion -->
-            <c:if test="${ not empty isLogeado }">
+            <c:if test="${ not empty usuario_logeado }">
             	<span class="badge badge-pill badge-light "></span>
-            		<a class="nav-link  btn btn-outline-success bg-success text-white" href="panel-administrador.jsp">${usuario}</a>
+            		<a class="nav-link  btn btn-outline-success bg-success text-white" href="panel-administrador.jsp">${usuario_logeado}</a>
             	</span>
             	
             	<span class="badge badge-pill badge-light"></span>

@@ -18,5 +18,7 @@ public interface UsuarioDAO extends CrudAble<Usuario> {
 	 * 
 	 */
 	ArrayList<Usuario> getAllByNombre( String palabraBuscada ) throws Exception;
+
+	Usuario getExiste(String nombre, String password) throws Exception;
 	
 }
