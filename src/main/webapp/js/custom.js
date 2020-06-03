@@ -30,22 +30,4 @@ function cifrar() {
 		
 }
 
-function descifrar() {
-	
-	console.log('cifrar y conseguir hash');
-	
-	//recupero la contraseña del input a atves de su ID
-	var contrasenia = document.getElementById('password').value;
-	
-	//consigo el hash mediante la libreria incluida en el pie.jsp
-	var hash = md5(contrasenia);
-	
-	
-	//guardo en el inpput el codigo hash
-	document.getElementById('password').value = hash;		
-	
-	//enviar formulario
-	return true; // si ponemos false no se envia el formulario
-	
-}
 
