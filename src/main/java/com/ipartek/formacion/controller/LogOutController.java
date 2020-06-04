@@ -29,53 +29,68 @@ public class LogOutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Variables a usar para pasar a la vista
-		String mensaje;
-		String idioma="ES";
 		
-		//obtiene todas las cookies creadas en un array
-		Cookie[] cookies = request.getCookies();
-		
-		//se lee el array de cookies
-		for ( Cookie c : cookies ) {
+		//obtiene la sesion creada por el navegador
+		HttpSession session1 = request.getSession();
+				
+		if(session1.getAttribute("usuario_logeado")==null) {
+					
+			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
+			request.setAttribute("alerta", alerta);
+			// ir a la nueva vista o jsp
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 			
-			//Se mira que idioma seleccionó el usuario y se guardo en la cookie
-			if ( "cIdioma".equals(c.getName()) ) {   // cookie encontrada
-				idioma = c.getValue();//se guarda el idioma
-				break;//sale del for
-			}			
-		}
+		}else {
 		
-		//Se evalua el idioma el idioma
-		switch (idioma) {
-		case "EN":
-			mensaje = "You have successfully signed out, See you soon!";
-			break;
+		
+				//Variables a usar para pasar a la vista
+				String mensaje;
+				String idioma="ES";
+				
+				//obtiene todas las cookies creadas en un array
+				Cookie[] cookies = request.getCookies();
+				
+				//se lee el array de cookies
+				for ( Cookie c : cookies ) {
+					
+					//Se mira que idioma seleccionó el usuario y se guardo en la cookie
+					if ( "cIdioma".equals(c.getName()) ) {   // cookie encontrada
+						idioma = c.getValue();//se guarda el idioma
+						break;//sale del for
+					}			
+				}
+				
+				//Se evalua el idioma el idioma
+				switch (idioma) {
+				case "EN":
+					mensaje = "You have successfully signed out, See you soon!";
+					break;
+					
+				case "ES":
+					mensaje = "Has cerrado sesión correctamente, ¡hasta pronto! ";
+					break;	
+		
+				default:
+					mensaje = "Ondo amaitu duzu saioa, laster arte!";
+					break;
+				}
 			
-		case "ES":
-			mensaje = "Has cerrado sesión correctamente, ¡hasta pronto! ";
-			break;	
-
-		default:
-			mensaje = "Ondo amaitu duzu saioa, laster arte!";
-			break;
+			
+				//se obtiene la session que se haya creado
+				HttpSession session = request.getSession();
+				
+				//se mata /invalida la sesion
+				session.invalidate();
+				
+				//Se inicializa a null para que no guarde nada
+				session = null;
+				
+				//se pasa el mensaje de DESLOGEO mediante una alerta
+				request.setAttribute("alerta", new Alerta("success", mensaje));
+				
+				//Se redirecciona a login
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-	
-	
-		//se obtiene la session que se haya creado
-		HttpSession session = request.getSession();
-		
-		//se mata /invalida la sesion
-		session.invalidate();
-		
-		//Se inicializa a null para que no guarde nada
-		session = null;
-		
-		//se pasa el mensaje de DESLOGEO mediante una alerta
-		request.setAttribute("alerta", new Alerta("success", mensaje));
-		
-		//Se redirecciona a login
-		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**

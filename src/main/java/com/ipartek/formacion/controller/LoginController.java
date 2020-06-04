@@ -125,6 +125,8 @@ public class LoginController extends HttpServlet {
 			
 			session.setAttribute("usuario_password", passwordSinCifrar);
 			
+			session.setMaxInactiveInterval(60*5);
+			
 			//Se evalua el idioma el idioma
 			switch (idioma) {
 			case "EN":
