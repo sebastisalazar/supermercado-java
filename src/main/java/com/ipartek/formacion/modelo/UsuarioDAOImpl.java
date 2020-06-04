@@ -3,6 +3,7 @@ package com.ipartek.formacion.modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.hibernate.validator.internal.util.IgnoreJava6Requirement;
@@ -24,13 +25,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return INSTANCE;
 	}
 
-	private final String SQL_GETALL = "SELECT id,nombre, contrasenia, id_rol FROM usuario";
-	private final String SQL_GETBYID = "SELECT id, nombre, contrasenia, id_rol FROM supermercado.usuario WHERE id=?";
+	
+	
+	
+	private final String SQL_GETALL     = "SELECT u.id, u.nombre, contrasenia, id_rol, r.nombre AS 'nombre_rol' FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id ORDER BY u.id DESC; ";
+	private final String SQL_GETBYID    = "SELECT u.id, u.nombre, contrasenia, id_rol, r.nombre AS 'nombre_rol' FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE u.id = ? ; ";
+	private final String SQL_EXISTE     = "SELECT u.id, u.nombre, contrasenia, id_rol, r.nombre AS 'nombre_rol' FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE u.nombre = ? AND contrasenia = ? ; ";
+	private final String SQL_GETBYNAME  = "SELECT u.id, u.nombre, contrasenia, id_rol, r.nombre AS 'nombre_rol' FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE nombre LIKE ? ;";
+	
+	
 	private final String SQL_DELETEBYID = "DELETE FROM usuario WHERE id=?";
 	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia, id_rol) VALUES(?,?,1)";
 	private final String SQL_UPDATE= "UPDATE usuario SET nombre=?, contrasenia=?, id_rol=? WHERE id=?";
-	private final String SQL_GETBYNAME= "SELECT id,nombre FROM usuario WHERE nombre LIKE ?";
-	private final String SQL_EXISTE = "SELECT id, nombre, contrasenia, id_rol FROM supermercado.usuario WHERE nombre=? AND contrasenia=?";
+	
+	
 
 	/**
 	 * @return Array List de todos los usuarios en la base de datos
@@ -50,17 +58,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			while (rs.next()) {
 				
-				//Usuario sin atributos
-				Usuario usuario = new Usuario();
-				
-				//asignacion de atributos al objeto vacio
-				usuario.setId(rs.getInt("id"));
-				usuario.setNombre(rs.getString("nombre"));
-				usuario.setContrasenia(rs.getString("contrasenia"));
-				usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
-				
-				//se añade al arraylist el usuario
-				usuarios.add(usuario);
+				usuarios.add( mapper(rs) );
 
 			}
 
@@ -95,10 +93,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
-					usuario.setId(rs.getInt("id"));
-					usuario.setNombre(rs.getString("nombre"));
-					usuario.setContrasenia(rs.getString("contrasenia"));
-					usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
+					usuario = mapper(rs);
 
 				}
 
@@ -198,9 +193,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				PreparedStatement pst= con.prepareStatement(SQL_UPDATE);
 			){
 				
-				pst.setString(1,pojo.getNombre());
-				pst.setString(2,pojo.getContrasenia());
-				pst.setInt(3, pojo.getId_rol());
+				pst.setString(1, pojo.getNombre());
+				pst.setString(2, pojo.getContrasenia());
+				pst.setInt(3, pojo.getId_rol().getId());
 				pst.setInt(4, pojo.getId());
 				
 				int filaActualizada=pst.executeUpdate();
@@ -284,11 +279,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
-					usuario= new Usuario();
-					usuario.setId(rs.getInt("id"));
-					usuario.setNombre(rs.getString("nombre"));
-					usuario.setContrasenia(rs.getString("contrasenia"));
-					usuario.setId_rol(Integer.parseInt(rs.getString("id_rol")));
+					usuario = mapper(rs);
 
 				}
 
@@ -303,5 +294,26 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 
 		return usuario;
+	}
+	
+	
+	private Usuario mapper( ResultSet rs ) throws SQLException {
+		
+		Usuario usuario = new Usuario();
+		
+		usuario.setId(rs.getInt("id"));
+		usuario.setNombre(rs.getString("nombre"));
+		usuario.setContrasenia( rs.getString("contrasenia"));
+		
+		//rol
+		Rol rol = new Rol();
+		rol.setId(rs.getInt("id_rol"));
+		rol.setNombre(rs.getString("nombre_rol"));
+		
+		// setear el rol al usuario
+		usuario.setId_rol(rol);
+		
+		return usuario;
+		
 	}
 }

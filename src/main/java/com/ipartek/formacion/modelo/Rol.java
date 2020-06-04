@@ -1,14 +1,19 @@
 package com.ipartek.formacion.modelo;
 
 public class Rol {
-
+	
 	private int id;
 	private String nombre;
 	
 	public Rol() {
 		super();
-		this.id = 0;
+		this.id = 1;
 		this.nombre = "";
+	}
+	
+	public Rol( int id ) {
+		this();
+		this.id = id;		
 	}
 
 	public int getId() {
@@ -32,7 +37,5 @@ public class Rol {
 		return "Rol [id=" + id + ", nombre=" + nombre + "]";
 	}
 	
-	
-	
-	
+
 }

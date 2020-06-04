@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.ProductoDAOImp;
+import com.ipartek.formacion.modelo.Rol;
 import com.ipartek.formacion.modelo.Usuario;
 import com.ipartek.formacion.modelo.UsuarioDAOImpl;
 
@@ -26,25 +28,35 @@ public class EditarUsuarioController2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//recogemos el id pasado por parametro
-		int id= Integer.parseInt(request.getParameter("id"));
+		//obtiene la sesion creada por el navegador
+		HttpSession session = request.getSession();
 		
-		//Inicializacion para operar contra bbdd
-		UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
-		
-		//Inicilizacion de usario
-		Usuario usuario= new Usuario();
-		
-		//ejecucion del select by id 
-		try {
-			usuario= dao.getById(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			request.setAttribute("usuario",usuario);
-			request.getRequestDispatcher("editarUsuario2.jsp").forward(request, response);
+		if(session.getAttribute("usuario_logeado")==null) {
+			
+			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
+			request.setAttribute("alerta", alerta);
+			// ir a la nueva vista o jsp
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else{
+			//recogemos el id pasado por parametro
+			int id= Integer.parseInt(request.getParameter("id"));
+			
+			//Inicializacion para operar contra bbdd
+			UsuarioDAOImpl dao= UsuarioDAOImpl.getInstance();
+			
+			//Inicilizacion de usario
+			Usuario usuario= new Usuario();
+			
+			//ejecucion del select by id 
+			try {
+				usuario= dao.getById(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				request.setAttribute("usuario",usuario);
+				request.getRequestDispatcher("editarUsuario2.jsp").forward(request, response);
+			}
 		}
-		
 		
 		
 	}
@@ -106,7 +118,7 @@ public class EditarUsuarioController2 extends HttpServlet {
 		 u.setId(Integer.parseInt(request.getParameter("id")));
 		 u.setNombre(nombre);
 		 u.setContrasenia(contrasenia);
-		 u.setId_rol(id_rol);
+		 u.setId_rol(new Rol(id_rol));
 		
 		 //ejecucion update y creacion de mensajes de alerta
 		try {

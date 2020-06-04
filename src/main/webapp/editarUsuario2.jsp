@@ -78,8 +78,8 @@
 						<tr>
 							<td>
 								<select class="text-center" name="id_rol" id="id_rol">
-								  <option value="1" ${ ( '1' eq usuario.id_rol ) ? 'selected' : '' }>Usuario</option>
-								  <option value="2" ${ ( '2' eq usuario.id_rol ) ? 'selected' : '' }>Administrador</option>
+								  <option value="1" ${ ( '1' eq usuario.id_rol.id ) ? 'selected' : '' }>Usuario</option>
+								  <option value="2" ${ ( '2' eq usuario.id_rol.id) ? 'selected' : '' }>Administrador</option>
 								</select>
 							</td>
 							

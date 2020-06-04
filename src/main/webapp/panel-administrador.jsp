@@ -1,4 +1,8 @@
+<%@page import="com.ipartek.formacion.controller.Alerta"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+
 <jsp:include page="includes/cabecera.jsp" >
  
 <jsp:param name="pagina" value="PanelControl" />
@@ -6,6 +10,14 @@
 <jsp:param name="title" value="Panel de Control" /> 
  
 </jsp:include>
+
+
+
+<c:if test = "${empty usuario_logeado}">
+		
+        <c:redirect url = "login"/>
+        
+</c:if>
 
 <div class="container pb-4">
 	<div class="container pt-5">
@@ -23,9 +35,9 @@
 				<br>
 				<a class="boton" href="lista-productos"> Ver tabla productos </a> 
 				<br>
-				<a class="boton" href="formulario-producto2.jsp"> Crear productos </a>
+				<a class="boton" href="crear-prod"> Crear productos </a>
 				<br>
-				<a class="boton" href="formulario-usuario2.jsp"> Crear Usuarios </a> 
+				<a class="boton" href="crear-usu"> Crear Usuarios </a> 
 			
 	 	</div>
 

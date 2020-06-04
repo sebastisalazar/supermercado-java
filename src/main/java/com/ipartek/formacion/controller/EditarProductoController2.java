@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 
@@ -28,27 +29,39 @@ public class EditarProductoController2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//obtiene el ID del formulario
-		int id= Integer.parseInt(request.getParameter("id"));
 		
-		//iniciliacion para llamar al getbyid
-		ProductoDAOImp dao= ProductoDAOImp.getInstance();
+		//obtiene la sesion creada por el navegador
+		HttpSession session = request.getSession();
 		
-		try {
-			//obtenemos el producto mediante el id y lo guardamos
-			Producto producto= dao.getById(id);
+		if(session.getAttribute("usuario_logeado")==null) {
 			
-			//se pasa el objeto producto obtenido con todos sus atributos a la vista
-			request.setAttribute("producto", producto);
+			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
+			request.setAttribute("alerta", alerta);
+			// ir a la nueva vista o jsp
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else{
+			 
+			//obtiene el ID del formulario
+			int id= Integer.parseInt(request.getParameter("id"));
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
+			//iniciliacion para llamar al getbyid
+			ProductoDAOImp dao= ProductoDAOImp.getInstance();
 			
-			//finalmente se redirecciona
-			request.getRequestDispatcher("editarProducto2.jsp").forward(request, response);
+			try {
+				//obtenemos el producto mediante el id y lo guardamos
+				Producto producto= dao.getById(id);
+				
+				//se pasa el objeto producto obtenido con todos sus atributos a la vista
+				request.setAttribute("producto", producto);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				
+				//finalmente se redirecciona
+				request.getRequestDispatcher("editarProducto2.jsp").forward(request, response);
+			}
 		}
-		
 		
 		
 	}

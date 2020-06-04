@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.Producto;
 import com.ipartek.formacion.modelo.ProductoDAOImp;
@@ -20,7 +21,18 @@ public class ProductosController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+    	//obtiene la sesion creada por el navegador
+    			HttpSession session = request.getSession();
+    			
+    			if(session.getAttribute("usuario_logeado")==null) {
+    				
+    				Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
+    				request.setAttribute("alerta", alerta);
+    				// ir a la nueva vista o jsp
+    				request.getRequestDispatcher("login.jsp").forward(request, response);
+    			}else{
+    				doPost(request, response);
+    			}
 	}
 
 	/**

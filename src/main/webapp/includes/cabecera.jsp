@@ -91,7 +91,7 @@
 					    </button>
 					    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 					      <a class="dropdown-item text-white " href="lista-productos">Listar productos</a>
-					      <a class="dropdown-item text-white " href="formulario-producto2.jsp">Registrar productos</a>
+					      <a class="dropdown-item text-white " href="crear-prod">Registrar productos</a>
 					    </div>
 					 </div>
 				 
@@ -101,7 +101,7 @@
 					    </button>
 					    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 					      <a class="dropdown-item text-white " href="lista-usuarios">Listar usuarios</a>
-					      <a class="dropdown-item text-white" href="formulario-usuario2.jsp">Registrar usuarios</a>
+					      <a class="dropdown-item text-white" href="crear-usu">Registrar usuarios</a>
 					    </div>
 					 </div>
 	            </c:if>

@@ -5,13 +5,13 @@ public class Usuario {
 	private int id;
 	private String nombre;
 	private String contrasenia;
-	private int id_rol;
+	private Rol id_rol;
 	
 	public Usuario() {
 		super();
 		this.id = 0;
 		this.nombre = "";
-		this.id_rol=0;
+		this.id_rol=new Rol();;
 		this.contrasenia="";
 	}
 
@@ -23,11 +23,11 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 
-	public int getId_rol() {
+	public Rol getId_rol() {
 		return id_rol;
 	}
 
-	public void setId_rol(int id_rol) {
+	public void setId_rol(Rol id_rol) {
 		this.id_rol = id_rol;
 	}
 

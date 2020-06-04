@@ -33,7 +33,18 @@ public class LoginController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//obtiene la sesion creada por el navegador
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("usuario_logeado")==null) {
+			
+			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
+			request.setAttribute("alerta", alerta);
+			// ir a la nueva vista o jsp
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("panel-administrador.jsp").forward(request, response);
+		}
 	}
 
 	
@@ -65,6 +76,7 @@ public class LoginController extends HttpServlet {
 		
 		
 		if (usuario!=null) {
+			
 			
 		//COOKIE
 			
@@ -104,6 +116,8 @@ public class LoginController extends HttpServlet {
 			// recoger todas las cookies en el servidor
 			Cookie[] arrayCookies = request.getCookies();
 			// para buscar una habrai que hacer un for y buscar por su identificador
+			
+			
 			
 			//Guardamos el nombre para mostrar quien esta logeado en la vista
 			

@@ -45,12 +45,11 @@
 					<td>${u.nombre}</td>
 					<td>${u.contrasenia}</td>
 					<td>
-						 ${ ( '1' eq u.id_rol ) ? 'Usuario' : '' }
-						 ${ ( '2' eq u.id_rol ) ? 'Administrador' : '' }
+						 ${u.id_rol.nombre}
 								
 					</td>
 					<td>
-						<a href="eliminar-usu?id=${u.id}">
+						<a href="eliminar-usu?id=${u.id_rol.id}">
 							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>
