@@ -41,7 +41,8 @@ public class LoginController extends HttpServlet {
 		
 		//parametros para sesion y cookies
 		String email= request.getParameter("email");
-		String password=request.getParameter("password");
+		String passwordCifrada=request.getParameter("passwordCifrar");
+		String passwordSinCifrar=request.getParameter("password");
 		String idioma=request.getParameter("idioma");
 		String recuerdame = request.getParameter("recuerdame");
 		Alerta alerta;
@@ -56,7 +57,7 @@ public class LoginController extends HttpServlet {
 		Usuario usuario=null;
 		
 		try {
-			usuario=dao.getExiste(email, password);
+			usuario=dao.getExiste(email, passwordCifrada);
 			
 		} catch (Exception e) {
 			alerta= new Alerta("danger",e.getMessage());
@@ -69,7 +70,7 @@ public class LoginController extends HttpServlet {
 			
 			// gestionar cookie del email	 y password
 			Cookie cEmail = new Cookie("cEmail", email );
-			Cookie cPassword= new Cookie("cPassword", password );
+			Cookie cPassword= new Cookie("cPassword", passwordSinCifrar);
 			Cookie cIdioma= new Cookie("cIdioma", idioma );
 			
 			// Guardar una cookie con la ultima visita
@@ -107,6 +108,8 @@ public class LoginController extends HttpServlet {
 			//Guardamos el nombre para mostrar quien esta logeado en la vista
 			
 			session.setAttribute("usuario_logeado", email);
+			
+			session.setAttribute("usuario_password", passwordSinCifrar);
 			
 			//Se evalua el idioma el idioma
 			switch (idioma) {

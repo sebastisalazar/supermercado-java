@@ -35,6 +35,7 @@
                         <div class="form-group">
 	                        <label for="password">Password</label>
 	                        <input type="password" name="password" class="form-control" id="password" value="${ cookie['cPassword'].value }" required>
+	                        <input type="hidden" name="passwordCifrar" class="form-control" id="passwordCifrar" value="">
                         </div>
                         
                         <div class="form-group">

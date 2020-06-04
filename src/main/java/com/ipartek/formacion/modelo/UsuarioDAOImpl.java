@@ -187,26 +187,32 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	 */
 	public Usuario update(Usuario pojo) throws Exception {
 		
+		
 		Usuario u= getById(pojo.getId());
-		try(
-			Connection con= ConnectionManager.getConnection();
-			PreparedStatement pst= con.prepareStatement(SQL_UPDATE);
-		){
+		
 			
-			pst.setString(1,pojo.getNombre());
-			pst.setString(2,pojo.getContrasenia());
-			pst.setInt(3, pojo.getId_rol());
-			pst.setInt(4, pojo.getId());
-			
-			int filaActualizada=pst.executeUpdate();
-			
-			if (filaActualizada==2) {
-				throw new Exception("\nLo sentimos, no existen registros con el ID "+ pojo.getId()+"\n");
-			}
+			try(
+				Connection con= ConnectionManager.getConnection();
+					
 				
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
+				PreparedStatement pst= con.prepareStatement(SQL_UPDATE);
+			){
+				
+				pst.setString(1,pojo.getNombre());
+				pst.setString(2,pojo.getContrasenia());
+				pst.setInt(3, pojo.getId_rol());
+				pst.setInt(4, pojo.getId());
+				
+				int filaActualizada=pst.executeUpdate();
+				
+				if (filaActualizada==2) {
+					throw new Exception("\nLo sentimos, no existen registros con el ID "+ pojo.getId()+"\n");
+				}
+					
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+			
 		
 		return u;
 	}

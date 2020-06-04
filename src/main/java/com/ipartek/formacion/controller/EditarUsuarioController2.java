@@ -62,7 +62,9 @@ public class EditarUsuarioController2 extends HttpServlet {
 		
 		//Guarda el value de los campos del formulario
 		String nombre;
-		String contrasenia;
+		String contrasenia=request.getParameter("contraseniaactual");
+		String password1=request.getParameter("password1");
+		String password2=request.getParameter("password2");
 		int id_rol;
 		
 		//Iniciliacion para operar contra la bbdd
@@ -78,14 +80,19 @@ public class EditarUsuarioController2 extends HttpServlet {
 			nombre=request.getParameter("nombre");
 		 }//fin if
 		 
+		 
+		 
 		//campo contraseña
-		 if (("").equalsIgnoreCase(request.getParameter("contrasenianueva"))==true) {
+		 if (!("").equalsIgnoreCase(password1) && !("").equalsIgnoreCase(password2)) {
 			 
-			 //si el campo contrasenia nueva esta vacio se mantiene la antigua
-			contrasenia=request.getParameter("contraseniaantigua");
-		 }else{
-			 //si el campo contrasenia se ha rellenado se recoge el dato
-			contrasenia=request.getParameter("contrasenianueva");
+			 if(password1.equalsIgnoreCase(password2)) {
+				 
+				 if(!password1.equalsIgnoreCase(contrasenia)) {
+					 contrasenia=password1; 
+				 }
+					 
+			 }
+			 
 		 }//fin if
 		 
 		 //campo id_rol

@@ -17,58 +17,79 @@
     
     
     <div class="container">   
-			<form action="editar-usu" method="POST" onsubmit="cifrar()">
+			<form action="editar-usu" method="POST" onsubmit="Updatecifrar()" id="formularioUpdate">
 				<table class="tabla table ">
 					<thead>
 						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
+						<th scope="col">Contrasenia</th>
 					</thead>
 					
 				  	<tbody>
 						
-						<tr>				
+						<tr >				
 							<td>
 								<input class="text-center" id="id" type="text" name="id" value="${usuario.id}" readonly>
 							</td>
+							<td rowspan="5">
+								
+								<label for="contraeniaactual">Contraseña actual: </label>
+								<input class="text-center" id="contraseniaactual" type="password" name="contraseniaactual" value="${usuario.contrasenia}" readonly>
+							
+									<div class="accordion" id="accordionExample">
+										  <div class="card caja-contrasenia">
+										    <div class="card-header btn-contrasenia" id="headingOne">
+										      <h2 class="mb-0">
+										        <button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+										          Cambiar contraseña
+										        </button>
+										      </h2>
+										    </div>
+										
+										    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+										      <div class="card-body">
+										      	
+										         <label for="password1">Escribe la nueva contraseña: </label><input class="text-center" id="password1" type="password" name="password1"  >
+										     	 <br> <br>
+										     	 <label for="password2">Rescribe la nueva contraseña: </label><input class="text-center" id="password2" type="password" name="password2" oninput="Iguales()" >
+										      	  <small id="mensaje" class="text-danger d-block" style="visibility:hidden">Las contraseñas no coinciden</small>
+										      </div>
+										    </div>
+										  </div>
+										 
+									</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">Nombre</th>
+						</tr>
+						<tr>
 							<td>
 								<input class="text-center" id="nombre" type="text" name="nombre" value="${usuario.nombre}">
 							</td>
+							
 						</tr>
+						
 										
 						<tr>
-							<th scope="col">Contrasenia</th>
-							<th scope="col">Rol</th>
+							<th scope="col">Rol de usuario</th>
 						</tr>
-						
-						
-						
 						
 						<tr>
 							<td>
-								<input class="text-center" id="passwordantigua" type="password" name="contraseniaantigua" value="${usuario.contrasenia}" readonly>
-							</td>
-							
-	
-							<td rowspan="3">
 								<select class="text-center" name="id_rol" id="id_rol">
 								  <option value="1" ${ ( '1' eq usuario.id_rol ) ? 'selected' : '' }>Usuario</option>
 								  <option value="2" ${ ( '2' eq usuario.id_rol ) ? 'selected' : '' }>Administrador</option>
 								</select>
 							</td>
+							
 						</tr>
 						
-						<tr >
-							<th scope="col">Cambiar Contrasenia</th>
-						</tr>
 						
-						<tr>
-							<td>
-								<input class="text-center" id="password" type="password" name="contrasenianueva"  placeholder="Introduce una contraseña nueva">
-							</td>
-						</tr>
+						
 											
 						<tr>
-							<td colspan="2"><input class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario"></td>
+							<td colspan="2"><input class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario" ></td>
 						</tr>
 								
 

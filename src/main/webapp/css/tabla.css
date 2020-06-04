@@ -18,3 +18,15 @@
 	vertical-align: middle;
 	border: 1px solid black;
 }
+
+
+.btn-contrasenia {
+    background-color: #ffff;
+    border-bottom: 0px white;
+}
+
+.caja-contrasenia {
+   
+   
+    border: 0px solid #ffff;
+}
