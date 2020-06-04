@@ -19,7 +19,7 @@
 		
 		
 	    <div class="container">   
-			<form action="crear-usu" method="POST">
+			<form action="crear-usu" method="POST" onsubmit="CrearCifrar()">
 				<table class="tabla table ">
 					<thead>
 						<th scope="col">Nombre</th>
@@ -49,7 +49,7 @@
 						<tr>
 							
 							<td>
-								<input class="text-center" id="contrasenia" type="text" name="contrasenia" placeholder="Escribe la contraseña">
+								<input class="text-center" id="password" type="password" name="contrasenia" placeholder="Escribe la contraseña">
 							</td>
 							
 						</tr>

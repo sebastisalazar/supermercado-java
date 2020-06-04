@@ -17,7 +17,7 @@
     
     
     <div class="container">   
-			<form action="editar-usu" method="POST" onsubmit="Updatecifrar()" id="formularioUpdate">
+			<form id="formularioUpdate" action="editar-usu" method="POST" onsubmit="Updatecifrar()" >
 				<table class="tabla table ">
 					<thead>
 						<th scope="col">ID</th>
@@ -48,7 +48,7 @@
 										    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 										      <div class="card-body">
 										      	
-										         <label for="password1">Escribe la nueva contraseña: </label><input class="text-center" id="password1" type="password" name="password1"  >
+										         <label for="password1">Escribe la nueva contraseña: </label><input class="text-center" id="password1" type="password" name="password1" oninput="Iguales()" >
 										     	 <br> <br>
 										     	 <label for="password2">Rescribe la nueva contraseña: </label><input class="text-center" id="password2" type="password" name="password2" oninput="Iguales()" >
 										      	  <small id="mensaje" class="text-danger d-block" style="visibility:hidden">Las contraseñas no coinciden</small>
@@ -89,7 +89,7 @@
 						
 											
 						<tr>
-							<td colspan="2"><input class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario" ></td>
+							<td colspan="2"><input id="actualizarUsuario" class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario" onclick="alerta()" ></td>
 						</tr>
 								
 
