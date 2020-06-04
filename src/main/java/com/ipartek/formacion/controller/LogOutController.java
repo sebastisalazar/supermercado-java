@@ -75,7 +75,7 @@ public class LogOutController extends HttpServlet {
 					break;
 				}
 			
-			
+			 
 				//se obtiene la session que se haya creado
 				HttpSession session = request.getSession();
 				
