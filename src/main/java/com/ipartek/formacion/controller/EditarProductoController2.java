@@ -33,34 +33,40 @@ public class EditarProductoController2 extends HttpServlet {
 		//obtiene la sesion creada por el navegador
 		HttpSession session = request.getSession();
 		
+		//si no existe ssesion con logeo
 		if(session.getAttribute("usuario_logeado")==null) {
-			
-			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
-			request.setAttribute("alerta", alerta);
-			// ir a la nueva vista o jsp
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+					
+					//crea mensajes para mostrar
+					Alerta alerta= new Alerta("warning","Debes logearte para poder ver la pagina solicitada.");
+					
+					//los guarda en la sesion
+					session.setAttribute("alerta", alerta);
+					
+					// redirecciona a login
+					response.sendRedirect("login.jsp");
+					
+		//si esta logeado da permiso a ver el formulario
 		}else{
 			 
-			//obtiene el ID del formulario
-			int id= Integer.parseInt(request.getParameter("id"));
-			
-			//iniciliacion para llamar al getbyid
-			ProductoDAOImp dao= ProductoDAOImp.getInstance();
-			
-			try {
-				//obtenemos el producto mediante el id y lo guardamos
-				Producto producto= dao.getById(id);
+				//obtiene el ID del formulario
+				int id= Integer.parseInt(request.getParameter("id"));
 				
-				//se pasa el objeto producto obtenido con todos sus atributos a la vista
-				request.setAttribute("producto", producto);
+				//iniciliacion para llamar al getbyid
+				ProductoDAOImp dao= ProductoDAOImp.getInstance();
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				
-				//finalmente se redirecciona
-				request.getRequestDispatcher("editarProducto2.jsp").forward(request, response);
-			}
+				try {
+					//obtenemos el producto mediante el id y lo guardamos
+					Producto producto= dao.getById(id);
+					
+					//se pasa el objeto producto obtenido con todos sus atributos a la vista
+					session.setAttribute("producto", producto);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					//se redirecciona
+					response.sendRedirect("editarProducto2.jsp");
+				}
 		}
 		
 		
@@ -72,6 +78,10 @@ public class EditarProductoController2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		//obtiene la session abierta
+		 HttpSession session= request.getSession();
+		
 		//iniciliacion para guardas mensajes de alerta
 		Alerta alerta = new Alerta();
 		
@@ -79,62 +89,85 @@ public class EditarProductoController2 extends HttpServlet {
 		ProductoDAOImp dao= ProductoDAOImp.getInstance();
 		
 		//Recoge los datos en los campos
-		String nombre;
-		String foto;
-		float precio;
+		String id=request.getParameter("id");
+		String nombre="";
+		String foto="https://picsum.photos/75/75";
+		float precio=0;
 		
 		//producto vacio a rellenar con los datos recogidos
 		Producto p= new Producto();
+		
+		//mensaje requeridos
+		
+		ArrayList<String> requeridos=new ArrayList<String>();
 	
 		//Comprobaciones de campos vacios
 		
 		//campo nombre
 		if (("").equalsIgnoreCase(request.getParameter("nombre"))==true) {
-			nombre="-";
+			requeridos.add("El campo nombre es requerido");
 		}else{
 			nombre=request.getParameter("nombre");
 		}
 		
 		//campo foto
-		if (("").equalsIgnoreCase(request.getParameter("foto"))==true) {
-			foto="https://picsum.photos/75/75";
-		}else{
+		if (("").equalsIgnoreCase(request.getParameter("foto"))==false) {
 			foto=request.getParameter("foto");
 		}
 		
 		//campo precio
 		if (("").equalsIgnoreCase(request.getParameter("precio"))==true) {
-			precio=0f;
+			requeridos.add("El campo precio es requerido");
 		}else{
 			precio=Float.parseFloat(request.getParameter("precio"));
 		}
 		
-		
-		//Asercion de datos al producto
-		p.setId(Integer.parseInt(request.getParameter("id")));
-		p.setNombre(nombre);
-		p.setPrecio(precio);
-		p.setFoto(foto);
-		
-		//ejecucuon del update
-		try {
-			dao.update(p);
-			alerta = new Alerta( "success", "Producto actualizado con exito");
-		} catch (Exception e) {
-			alerta = new Alerta( "danger", "Error, el producto no se ha podido editar. " + e.getMessage());
-			e.printStackTrace();
-		}finally {
+		//si NO existen campos requeridos
+		if (requeridos.size()==0) {
 			
-			//Se obtiene el estado de la lista despues del update
-			ArrayList<Producto> productos= dao.getAll();
+			//Asercion de datos al producto
+			p.setId(Integer.parseInt(id));
+			p.setNombre(nombre);
+			p.setPrecio(precio);
+			p.setFoto(foto);
 			
-			//se pasa el estado de la lista despues del update y los mensajes de alerta obtenidos
-			request.setAttribute("productos", productos);
-			request.setAttribute("alerta", alerta);
+			//ejecucuon del update
+			try {
+				dao.update(p);
+				alerta = new Alerta( "success", "Producto actualizado con exito");
+			} catch (Exception e) {
+				alerta = new Alerta( "danger", "Error al actualizar, " + e.getMessage());
+			}finally {
+				
+				//Se obtiene el estado de la lista despues del update
+				ArrayList<Producto> productos= dao.getAll();
+				
+				//se pasa el estado de la lista despues del update y los mensajes de alerta obtenidos
+				session.setAttribute("productos", productos);
+				session.setAttribute("alerta", alerta);
+				
+				//Finalmente se redirecciona
+				response.sendRedirect("tabla-producto.jsp");
+			}
 			
-			//Finalmente se redirecciona
-			request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
+			
+		//si existen campos requeridos
+		}else {
+			
+			//se pasan los atributos escritos a la vista
+			session.setAttribute("id",id);
+			session.setAttribute("nombre", nombre);
+			session.setAttribute("foto", foto);
+			session.setAttribute("precio", precio);
+			
+			//se pasa los mensajes
+			session.setAttribute("requeridos", requeridos);
+			//se redirecciona
+			response.sendRedirect("editarProducto2.jsp");
 		}
+		
+		
+		
 		
 		
 	}

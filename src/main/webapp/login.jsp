@@ -25,8 +25,6 @@
                         	<p class="text-center">Ultima visita <span class="font-weight-bold">${cookie['cUltimaVisita'].value}</span></p>
                         </c:if>
                         
-                        
-                        
                         <div class="form-group mt-5">
 	                        <label for="email">Email</label>
 	                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" value="${ cookie['cEmail'].value }" required>

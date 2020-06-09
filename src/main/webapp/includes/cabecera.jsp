@@ -1,46 +1,107 @@
 <%@page import="com.ipartek.formacion.controller.Alerta"%>
 <%@page import="com.mysql.fabric.Response"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <!-- Si el usuario NO esta logeado no podrá visitar las siguientes paginas-->
+    <c:if test="${empty usuario_logeado}">
+    
+    	<c:choose>
+         
+	         <c:when test = "${'Panel de Control' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Lista productos' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Lista usuarios' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Crear producto' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Crear usuario' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Productos' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+	         <c:when test = "${'Usuarios' eq param.title}">
+	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	         </c:when>
+	         
+     	 </c:choose>
+     	 
+     	 
+     	 <% 
+     	 	Alerta alerta= new Alerta("warning","Debes logearte para poder ver la pagina solicitada.");
+     	 	session.setAttribute("alerta", alerta);
+     	 
+     	 %>
+    
+    
+    </c:if>
+    
+    <!-- Si el usuario esta logeado no podrá visitar la pagina login -->
+    <c:if test="${not empty usuario_logeado}">
+    	<c:if test = "${'Administrador' eq param.title}">
+	        <meta http-equiv="refresh" content="0; url=panel-administrador.jsp">
+	        
+	    </c:if>
+	   
+    </c:if>
+    
+   
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
     
     <!-- datatables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 
     <!-- Estilos para la cabecera-->
-    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css"/>
     
     <!-- Estilos para el footer-->
-    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
     
     <!-- Estilio inicio -->
-    <link rel="stylesheet" type="text/css" href="css/index2.css">
+    <link rel="stylesheet" type="text/css" href="css/index2.css"/>
     
     <!-- Estilio para el curriculum -->
-    <link rel="stylesheet" type="text/css" href="css/curriculum2.css">
+    <link rel="stylesheet" type="text/css" href="css/curriculum2.css"/>
     
     <!-- Estilio para la CARD de INICIO -->
-    <link rel="stylesheet" type="text/css" href="css/productos.css">
+    <link rel="stylesheet" type="text/css" href="css/productos.css"/>
 
 	<!-- Estilio para el formulario completado -->
-    <link rel="stylesheet" href="css/formulario-resumen2.css">
+    <link rel="stylesheet" href="css/formulario-resumen2.css" />
     
     <!-- Estilio para tablas -->
-    <link rel="stylesheet" href="css/tabla.css">
+    <link rel="stylesheet" href="css/tabla.css" />
     
     <!-- Estilio para el menu -->
-    <link rel="stylesheet" href="css/cabecera.css">
+    <link rel="stylesheet" href="css/cabecera.css" />
     
     <title>${param.title} | Supermercado</title>
   </head>
+  
   <body onload="init()">
     <header class="mb-5">
         <!---Barra de navegacion-->
@@ -109,21 +170,21 @@
             </ul>
             
             
-            <!-- ense�a el boton de logout o iniciar sesion si el usuario no esta logeado -->
+            <!-- enseña el boton de logout o iniciar sesion si el usuario no esta logeado -->
          	<c:if test="${ empty usuario_logeado }">
          		<span class="form-inline">
-            	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="login.jsp">Iniciar Sesi�n</a>
+            	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="login.jsp">Iniciar Sesión</a>
             	</span>
             </c:if>	  
             
-            <!-- Si el usuario se logea ense�a su usuario + un boton para cerrar sesion -->
+            <!-- Si el usuario se logea enseña su usuario + un boton para cerrar sesion -->
             <c:if test="${ not empty usuario_logeado }">
             	<span class="badge badge-pill badge-light "></span>
             		<a class="nav-link  btn btn-outline-success bg-success text-white" href="panel-administrador.jsp">${usuario_logeado}</a>
             	</span>
             	
             	<span class="badge badge-pill badge-light"></span>
-            		<a class="nav-link  btn btn-outline-success bg-success text-white ml-3" href="logout">Cerrar Sesi�n</a>
+            		<a class="nav-link  btn btn-outline-success bg-success text-white ml-3" href="logout">Cerrar Sesión</a>
             	</span>
             </c:if>
               

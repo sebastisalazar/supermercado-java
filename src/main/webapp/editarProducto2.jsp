@@ -17,6 +17,18 @@
     
     
  		<div class="container">   
+ 		
+ 			<!-- Si existen campos requeridos los pinta -->
+ 			<c:if test="${not empty requeridos}">
+	    		<c:forEach items="${requeridos}" var="r">
+	    			<p class="text-center text-danger">${r}</p>
+	    		</c:forEach>
+	    		
+	    		<!-- Una vez pintado borra los mensajes -->
+	    		<%session.setAttribute("requeridos", null); %>
+	    	</c:if>
+	    	
+	    	
 			<form action="editar-prod" method="POST">
 				<table class="tabla table">
 					<thead>
@@ -33,7 +45,7 @@
 								<input id="id" type="text" name="id" value="${producto.id}" readonly>
 							</td>
 							<td rowspan="3">
-								<img class="fotoProd" src="${producto.foto}" alt="foto producto">
+								<img class="fotoProd" src="${producto.foto}" alt="foto producto" placeholder="">
 								<br><br>
 								
 							</td>
@@ -45,7 +57,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input id="nombre" type="text" name="nombre" value="${producto.nombre}">
+								<input id="nombre" type="text" name="nombre" placeholder="${producto.nombre}" value="${nombre}">
 							</td>
 						</tr>
 										
@@ -55,7 +67,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input id="precio" type="text" name="precio" value="${producto.precio}">
+								<input id="precio" type="text" name="precio" placeholder="${producto.precio}" value="${(precio!=0)?precio:''}">
 							</td>
 							<td>
 								<input id="foto" type="file" name="foto" readonly>

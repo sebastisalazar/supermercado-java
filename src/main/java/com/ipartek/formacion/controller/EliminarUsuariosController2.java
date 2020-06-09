@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.Usuario;
 import com.ipartek.formacion.modelo.UsuarioDAOImpl;
@@ -50,12 +51,15 @@ public class EliminarUsuariosController2 extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			//obtiene la session creada
+			HttpSession session=request.getSession();
+			
 			//se pasan los mensajes de la respuesta y el estado de la lista actual despues del update a la vista
-			request.setAttribute("usuarios", usuarios);
-			request.setAttribute("alerta", alerta);
+			session.setAttribute("usuarios", usuarios);
+			session.setAttribute("alerta", alerta);
 			
 			//se redirecciona
-			request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
+			response.sendRedirect("lista-usuarios.jsp");
 		}
 		
 	}

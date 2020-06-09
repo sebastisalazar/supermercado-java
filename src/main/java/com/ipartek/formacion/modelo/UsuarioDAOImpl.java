@@ -164,7 +164,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 					}
 				}
 			}catch (Exception duplicatedQException) {
-				throw new Exception("\nYa existe un usuario con el NOMBRE "+pojo.getNombre()+"\n");
+				throw new Exception("\nLo sentimos, el usuario "+pojo.getNombre()+"\n ya está registrado");
 			}
 				
 			

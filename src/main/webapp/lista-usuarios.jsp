@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+
 <jsp:include page="includes/cabecera.jsp" >
  
 <jsp:param name="pagina" value="Usuarios" />
@@ -18,7 +19,7 @@
         
         <!-- Opciones extras -->
         <p class="text-center mb-5">
-          <a href="formulario-usuario2.jsp" class="btn bg-primary text-white">Registrar nuevo usuario</a>
+          <a href="crear-usu" class="btn bg-primary text-white">Registrar nuevo usuario</a>
           <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
         </p>
 		
@@ -49,7 +50,7 @@
 								
 					</td>
 					<td>
-						<a href="eliminar-usu?id=${u.id_rol.id}">
+						<a href="eliminar-usu?id=${u.id}">
 							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.Producto;
 import com.ipartek.formacion.modelo.ProductoDAOImp;
@@ -43,12 +44,17 @@ public class EliminarProductoController2 extends HttpServlet {
 			//inicialiacion para guardar el estado de la lista despues del delete
 			ArrayList<Producto> productos=dao.getAll();
 			
-			//se pasan los mensajes de la respuesta y el estado de la lista actual despues del update a la vista
-			request.setAttribute("alerta", alerta);
-			request.setAttribute("productos", productos);
 			
-			//Se redirecciona
-			request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
+			//obtiene la session creada
+			HttpSession session=request.getSession();
+			
+			//se pasan los mensajes de la respuesta y el estado de la lista actual despues del update a la vista
+			session.setAttribute("alerta", alerta);
+			session.setAttribute("productos", productos);
+			
+		
+			//se redirecciona
+			response.sendRedirect("tabla-producto.jsp");
 		}
 		
 		

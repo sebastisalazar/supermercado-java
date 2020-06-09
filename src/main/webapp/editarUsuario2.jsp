@@ -16,7 +16,17 @@
     	</p>
     
     
-    <div class="container">   
+    <div class="container"> 
+    		
+    		<!-- Si existen campos requeridos los pinta -->
+    		<c:if test="${not empty requeridos}">
+	    		<c:forEach items="${requeridos}" var="r">
+	    			<p class="text-center text-danger">${r}</p>
+	    		</c:forEach>
+	    		<!-- Una vez pintado borra los mensajes -->
+	    		<%session.setAttribute("requeridos", null); %>
+	    	</c:if>
+      
 			<form id="formularioUpdate" action="editar-usu" method="POST" onsubmit="Updatecifrar()" >
 				<table class="tabla table ">
 					<thead>
@@ -51,6 +61,8 @@
 										         <label for="password1">Escribe la nueva contraseña: </label><input class="text-center" id="password1" type="password" name="password1" oninput="Iguales()" >
 										     	 <br> <br>
 										     	 <label for="password2">Rescribe la nueva contraseña: </label><input class="text-center" id="password2" type="password" name="password2" oninput="Iguales()" >
+										      	  <input class="text-center" id="password1copia" type="hidden" name="password1copia">
+										      	  <input class="text-center" id="password2copia" type="hidden" name="password2copia">
 										      	  <small id="mensaje" class="text-danger d-block" style="visibility:hidden">Las contraseñas no coinciden</small>
 										      </div>
 										    </div>
@@ -65,7 +77,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input class="text-center" id="nombre" type="text" name="nombre" value="${usuario.nombre}">
+								<input class="text-center" id="nombre" type="text" name="nombre" placeholder="${usuario.nombre}" value="${usuario.nombre}">
 							</td>
 							
 						</tr>
@@ -89,7 +101,7 @@
 						
 											
 						<tr>
-							<td colspan="2"><input id="actualizarUsuario" class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario" onclick="alerta()" ></td>
+							<td colspan="2"><input id="actualizarUsuario" class="btn btn-primary" id="boton" type="submit" value="Actualizar usuario" ></td>
 						</tr>
 								
 

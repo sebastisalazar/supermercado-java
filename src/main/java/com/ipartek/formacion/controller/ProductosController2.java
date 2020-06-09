@@ -24,12 +24,19 @@ public class ProductosController2 extends HttpServlet {
     	//obtiene la sesion creada por el navegador
     			HttpSession session = request.getSession();
     			
+    			//si no existe ssesion con logeo
     			if(session.getAttribute("usuario_logeado")==null) {
     				
-    				Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
-    				request.setAttribute("alerta", alerta);
-    				// ir a la nueva vista o jsp
-    				request.getRequestDispatcher("login.jsp").forward(request, response);
+    				//crea mensaje 
+    				Alerta alerta= new Alerta("warning","Debes logearte para poder ver la pagina solicitada.");
+    				
+    				
+    				//pasa el mensaje a la vista
+    				session.setAttribute("alerta", alerta);
+    				
+    				
+    				// redirecciona a login
+    				response.sendRedirect("login.jsp");
     			}else{
     				doPost(request, response);
     			}
@@ -40,15 +47,17 @@ public class ProductosController2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		//para conseguir los datos de la base de datos
 		ProductoDAOImp p= ProductoDAOImp.getInstance();
 		ArrayList<Producto> productos= p.getAll();
 		
 		//datos para enviar a la vista
-		request.setAttribute("productos", productos);
+		session.setAttribute("productos", productos);
 		
 		//ir a la nueva vista o jsp
-		request.getRequestDispatcher("tabla-producto.jsp").forward(request, response);
+		response.sendRedirect("tabla-producto.jsp");
 	}
 
 }

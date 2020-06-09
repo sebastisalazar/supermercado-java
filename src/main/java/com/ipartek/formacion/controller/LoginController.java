@@ -32,14 +32,20 @@ public class LoginController extends HttpServlet {
 		//obtiene la sesion creada por el navegador
 		HttpSession session = request.getSession();
 		
+		//si no existe ssesion con logeo
 		if(session.getAttribute("usuario_logeado")==null) {
 			
+			//crea mensaje 
 			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
-			request.setAttribute("alerta", alerta);
-			// ir a la nueva vista o jsp
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
+			//pasa la alerta a la vista
+			session.setAttribute("alerta", alerta);
+			
+			// ir a login
+			response.sendRedirect("login.jsp");
+			
 		}else {
-			request.getRequestDispatcher("panel-administrador.jsp").forward(request, response);
+			response.sendRedirect("panel-administrador.jsp");
 		}
 	}
 
@@ -121,7 +127,7 @@ public class LoginController extends HttpServlet {
 			
 			session.setAttribute("usuario_password", passwordSinCifrar);
 			
-			session.setMaxInactiveInterval(60*5);
+			session.setMaxInactiveInterval(60*5);//borra sesion si no hay actividad en 5 minutos
 			
 			//Se evalua el idioma el idioma
 			switch (idioma) {
@@ -144,26 +150,26 @@ public class LoginController extends HttpServlet {
 			
 			
 			//Se pasa la alerta con mensajes a la vista
-			request.setAttribute("alerta", alerta);
+			session.setAttribute("alerta", alerta);
 		
-			//se redirecciona otra vez al login
-			request.getRequestDispatcher("panel-administrador.jsp").forward(request, response);
+			//se redirecciona otra vez al panel de administrador
+			response.sendRedirect("panel-administrador.jsp");
 			
 		}else {//si no esta logeado
 			
 			
 			//la session se invalida
-			session.invalidate();
+			//session.invalidate();
 			
 			//se crea la alerta para informar del error con un mensaje
 			alerta= new Alerta("danger", "Usuario o password incorrectos");
 			
 			//se pasa la alerta con los mensajes para ser leidos en la vista
-			request.setAttribute("alerta", alerta);
+			session.setAttribute("alerta", alerta);
 			
 			
 			//se redirecciona otra vez al login
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			response.sendRedirect("login.jsp");
 		}
 		
 		

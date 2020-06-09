@@ -31,12 +31,16 @@ public class TablaUsuariosController2 extends HttpServlet {
 		//obtiene la sesion creada por el navegador
 		HttpSession session = request.getSession();
 		
+		//si no existe ssesion con logeo
 		if(session.getAttribute("usuario_logeado")==null) {
 			
 			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
-			request.setAttribute("alerta", alerta);
-			// ir a la nueva vista o jsp
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
+			//pasa la alerta a la vista
+			session.setAttribute("alerta", alerta);
+			
+			// redireccion a login
+			response.sendRedirect("login.jsp");
 		}else{
 			doPost(request, response);
 		}
@@ -49,6 +53,10 @@ public class TablaUsuariosController2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//obtiene la sesion creada por el navegador
+				HttpSession session = request.getSession();
+		
 		// conseguir los alumnos de la bbdd
 		
 				UsuarioDAOImpl dao = UsuarioDAOImpl.getInstance();		
@@ -61,10 +69,10 @@ public class TablaUsuariosController2 extends HttpServlet {
 				}
 				
 				// enviar la informacion a la vista		
-				request.setAttribute("usuarios", usuarios );
+				session.setAttribute("usuarios", usuarios );
 				
-				// ir a la nueva vista o jsp
-				request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
+				//se redirecciona otra vez al panel de administrador
+				response.sendRedirect("lista-usuarios.jsp");
 				
 	}
 

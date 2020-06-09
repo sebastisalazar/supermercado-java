@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
+
+ 
 <jsp:include page="includes/cabecera.jsp" >
  
 <jsp:param name="pagina" value="Usuarios" />
@@ -7,6 +10,7 @@
 <jsp:param name="title" value="Crear usuario" /> 
  
 </jsp:include>
+
 
 <div class="container pt-5">
 		<jsp:include page="includes/alerta.jsp"></jsp:include>
@@ -18,7 +22,14 @@
         </p>
 		
 		
-	    <div class="container">   
+	    <div class="container">
+	    
+	    	<c:if test="${not empty requeridos}">
+	    		<c:forEach items="${requeridos}" var="r">
+	    			<p class="text-center text-danger">${r}</p>
+	    		</c:forEach>
+	    	
+	    	</c:if>
 			<form action="crear-usu" method="POST" onsubmit="CrearCifrar()">
 				<table class="tabla table ">
 					<thead>
@@ -31,14 +42,14 @@
 						
 						<tr>				
 							<td>
-								<input class="text-center" id="nombre" type="text" name="nombre" placeholder="Escribe el usuario">
+								<input class="text-center" id="nombre" type="text" name="nombre" placeholder="Escribe el usuario" value="${nombreIntroducido}">
 							</td>
 							
 							<td rowspan="3">
 								
 								<select class="text-center" name="id_rol" id="id_rol">
-								  <option value="1">Usuario</option>
-								  <option value="2">Administrador</option>
+								  <option value="1" ${(idRolIntroducido==1)? 'selected':''} >Usuario</option>
+								  <option value="2" ${(idRolIntroducido==2)? 'selected':''}>Administrador</option>
 								</select>
 							</td>
 						</tr>
@@ -49,7 +60,9 @@
 						<tr>
 							
 							<td>
-								<input class="text-center" id="password" type="password" name="contrasenia" placeholder="Escribe la contraseña">
+								<input class="text-center" id="password" type="password" name="contraseniaCifrada" placeholder="Escribe la contraseña" value="${contraseniaIntroducida}">
+								<input class="text-center" id="password2" type="hidden" name="contraseniaSinCifrar">
+							
 							</td>
 							
 						</tr>
@@ -57,6 +70,12 @@
 						<tr>
 							<td colspan="2"><input class="btn btn-primary" id="boton" type="submit" value="Crear usuario"></td>
 						</tr>
+						
+						<c:if test="${not empty requeridos}">
+							
+							<%session.removeAttribute("requeridos"); %>
+						
+						</c:if>
 							
 					</tbody>
 				</table>

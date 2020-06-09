@@ -22,19 +22,32 @@ public class CrearProductoController2 extends HttpServlet {
 		//obtiene la sesion creada por el navegador
 		HttpSession session = request.getSession();
 		
+		//si no existe ssesion con logeo
 		if(session.getAttribute("usuario_logeado")==null) {
 			
-			Alerta alerta= new Alerta("warning","Vista sólo disponible para usuarios logeados.");
-			request.setAttribute("alerta", alerta);
-			// ir a la nueva vista o jsp
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			//crea mensajes para mostrar
+			Alerta alerta= new Alerta("warning","Debes logearte para poder ver la pagina solicitada.");
+			
+			//los guarda en la sesion
+			session.setAttribute("alerta", alerta);
+			
+			// redirecciona a login
+			response.sendRedirect("login.jsp");
+			
+			//si esta logeado da permiso a ver el formulario
 		}else{
-			request.getRequestDispatcher("formulario-producto2.jsp").forward(request, response);
+			
+			
+			response.sendRedirect("formulario-producto2.jsp");
 		}
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//obtiene la session abierta
+		 HttpSession session= request.getSession();
+		 
 		//Conseguir los datos de la base de datos
 		  Alerta alerta= new Alerta();
 		  ProductoDAOImp dao= ProductoDAOImp.getInstance();
@@ -83,9 +96,9 @@ public class CrearProductoController2 extends HttpServlet {
 			alerta = new Alerta( "danger", "Error, no se ha podido crear. "+e.getMessage());
 		}
 		  //Respuesta
-		  request.setAttribute("alerta", alerta);
+		  session.setAttribute("alerta", alerta);
 		  //redireccionamiento
-		  request.getRequestDispatcher("formulario-producto2.jsp").forward(request, response);
+		  response.sendRedirect("formulario-producto2.jsp");
 		  
 		 
 		

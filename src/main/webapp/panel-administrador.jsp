@@ -11,13 +11,6 @@
  
 </jsp:include>
 
- 
-
-<c:if test = "${empty usuario_logeado}">
-		
-        <c:redirect url = "login"/>
-        
-</c:if>
 
 <div class="container pb-4">
 	<div class="container pt-5">

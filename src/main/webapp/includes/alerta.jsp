@@ -9,5 +9,6 @@
 	    <span aria-hidden="true">&times;</span>
 	  </button>
 	</div>
+	<%session.setAttribute("alerta",null);%>
 	
-</c:if>	
+</c:if>

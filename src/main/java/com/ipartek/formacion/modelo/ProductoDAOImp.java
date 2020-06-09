@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 public class ProductoDAOImp implements CrudAble<Producto> {
 
 	private static ProductoDAOImp INSTANCE = null;
@@ -274,6 +276,8 @@ public class ProductoDAOImp implements CrudAble<Producto> {
 						+ " No existe en la base de datos");
 			}
 
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			throw new Exception("El producto "+pojo.getNombre()+" ya está registrado");
 		}
 
 		return pojo;

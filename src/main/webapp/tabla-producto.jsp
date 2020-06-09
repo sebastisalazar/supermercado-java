@@ -15,7 +15,7 @@
      
         <h1 class="text-primary text-center mb-5">Lista de productos</h1>
         <p class="text-center mb-5">
-          <a href="formulario-producto2.jsp" class="btn bg-primary text-white">Registrar nuevo producto</a>
+          <a href="crear-prod" class="btn bg-primary text-white">Registrar nuevo producto</a>
        	  <a href="panel-administrador.jsp" class="btn bg-primary text-white">Ir al panel de control</a>
         </p>
 		
