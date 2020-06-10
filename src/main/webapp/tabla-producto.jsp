@@ -45,7 +45,7 @@
 						<img src="${p.foto}" alt="foto del producto">
 					</td>
 					<td>
-						<a href="eliminar-prod?id=${p.id}">
+						<a onclick="confirmar('${p.nombre}')" href="eliminar-prod?id=${p.id}">
 							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>

@@ -50,7 +50,7 @@
 								
 					</td>
 					<td>
-						<a onclick="confirm('¿ Deseas borrar el usuario ${u.nombre}?')" href="eliminar-usu?id=${u.id}">
+						<a onclick="confirmar('${u.nombre}')" href="eliminar-usu?id=${u.id}">
 							<i class="fas fa-trash text-danger"></i>
 						</a>
 					</td>
