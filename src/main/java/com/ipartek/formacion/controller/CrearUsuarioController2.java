@@ -114,35 +114,54 @@ public class CrearUsuarioController2 extends HttpServlet {
 			 session.setAttribute("idRolIntroducido", id_rol);
 			 session.setAttribute("requeridos", requeridos);
 			 
+			 
 			 //redireccion al formulario
 			 response.sendRedirect("formulario-usuario2.jsp");
 			 
 //SI NO EXISTEN mensajes para campos requeridos
 		}else {
 			
+			
+			
+			ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
+			
 			//asercion de atributos al objeto vacio
-			 
 			 u.setNombre(nombre);
 			 u.setNombre(nombre);
 			 u.setContrasenia(contrasenia);
 			 u.setId_rol(new Rol(id_rol));
+			 
+			 
+			 
+			//se guardan en la session para que en la vista se puedan leer
+			 session.removeAttribute("nombreIntroducido");
+			 
+			 //esta contraseña es la del campo oculto, solo se usa para cuando exista un error de campo y poder devolver lo que se escribrio
+			 session.removeAttribute("contraseniaIntroducida");
+			 session.removeAttribute("idRolIntroducido");
 			
 			 //ejecucion de insert y creacion de alertas
-			 
 			try {
 				
 				u=dao.insert(u);
+				
+				//lista para guardar los usuarios
+				usuarios= dao.getAll();
+				
+				//envia los mensajes
 				alerta = new Alerta( "success", "Usuario creado con exito");
 				
 			} catch (Exception e) {
-				
+				//envia los mensajes
 				alerta = new Alerta( "danger",e.getMessage());
 				
 			}finally{
+				
+				session.setAttribute("usuarios",usuarios);
 				//se envian los mensajes de alerta a la vista
 				session.setAttribute("alerta", alerta);
 				//se redireccion al formulario
-				response.sendRedirect("formulario-usuario2.jsp");
+				response.sendRedirect("lista-usuarios.jsp");
 			}
 			
 			

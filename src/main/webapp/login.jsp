@@ -3,9 +3,9 @@
 
 <jsp:include page="includes/cabecera.jsp" >
  
-<jsp:param name="pagina" value="Administrador" />
+<jsp:param name="pagina" value="Iniciar sesion" />
  
-<jsp:param name="title" value="Administrador" /> 
+<jsp:param name="title" value="Iniciar sesion" /> 
  
 </jsp:include>
 
@@ -15,6 +15,25 @@
                 
                 <div class=" mt-5">
                     <jsp:include page="includes/alerta.jsp"></jsp:include>
+                    
+                    
+                    <!-- Si existe mensaje de restriccion se pinta -->
+                    <c:if test="${not empty restringido}">
+ 
+						<div class="alert alert-${restringido.tipo} alert-dismissible fade show" role="alert">
+	 							 ${restringido.texto}
+	 							 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	   									 <span aria-hidden="true">&times;</span>
+	 							 </button>
+						</div>
+	
+	
+						<!-- Una vez pintado se borra -->
+						<%session.removeAttribute("restringido");%>
+						
+					</c:if>
+					
+					
                     <!--Formulario login-->
                     <form class="mt-5" action="login" method="POST" onsubmit="cifrar()">
                         <h1 class="text-primary text-center pt-20">Portal del Administrador</h1>

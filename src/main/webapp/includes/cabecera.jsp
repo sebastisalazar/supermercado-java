@@ -1,4 +1,6 @@
+
 <%@page import="com.ipartek.formacion.controller.Alerta"%>
+<%@page import="javax.servlet.jsp.jstl.sql.ResultSupport"%>
 <%@page import="com.mysql.fabric.Response"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,55 +16,62 @@
     
     <!-- Si el usuario NO esta logeado no podrá visitar las siguientes paginas-->
     <c:if test="${empty usuario_logeado}">
-    
+    	
+    	
     	<c:choose>
          
 	         <c:when test = "${'Panel de Control' eq param.title}">
+	         	
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
+	         	
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
+	            
 	         </c:when>
 	         
 	         <c:when test = "${'Lista productos' eq param.title}">
+	         	
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
 	         
 	         <c:when test = "${'Lista usuarios' eq param.title}">
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
 	         
 	         <c:when test = "${'Crear producto' eq param.title}">
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
 	         
 	         <c:when test = "${'Crear usuario' eq param.title}">
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
-	         
+	         	
 	         <c:when test = "${'Productos' eq param.title}">
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
 	         
 	         <c:when test = "${'Usuarios' eq param.title}">
+	         	<% session.setAttribute("restringido",new Alerta("warning","Debes logearte para poder ver la pagina solicitada."));%>
 	            <meta http-equiv="refresh" content="0; url=login.jsp">
 	         </c:when>
 	         
+	         
      	 </c:choose>
      	 
-     	 
-     	 <% 
-     	 	Alerta alerta= new Alerta("warning","Debes logearte para poder ver la pagina solicitada.");
-     	 	session.setAttribute("alerta", alerta);
-     	 
-     	 %>
-    
     
     </c:if>
     
     <!-- Si el usuario esta logeado no podrá visitar la pagina login -->
     <c:if test="${not empty usuario_logeado}">
-    	<c:if test = "${'Administrador' eq param.title}">
+    	
+    	<c:if test = "${'Iniciar sesion' eq param.title}">
 	        <meta http-equiv="refresh" content="0; url=panel-administrador.jsp">
-	        
 	    </c:if>
+	    
 	   
     </c:if>
     

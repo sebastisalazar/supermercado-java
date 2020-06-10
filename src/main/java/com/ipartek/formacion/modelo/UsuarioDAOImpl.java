@@ -35,7 +35,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	
 	private final String SQL_DELETEBYID = "DELETE FROM usuario WHERE id=?";
-	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia, id_rol) VALUES(?,?,1)";
+	private final String SQL_INSERT ="INSERT INTO usuario (nombre, contrasenia, id_rol) VALUES(?,?,?)";
 	private final String SQL_UPDATE= "UPDATE usuario SET nombre=?, contrasenia=?, id_rol=? WHERE id=?";
 	
 	
@@ -152,6 +152,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		){
 			pst.setString(1, pojo.getNombre());
 			pst.setString(2, pojo.getContrasenia());
+			pst.setInt(3, (pojo.getId_rol()).getId());
 			try{
 				int filaInsertada= pst.executeUpdate();
 				if (filaInsertada==1) {
